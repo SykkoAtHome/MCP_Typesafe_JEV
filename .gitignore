@@ -1,0 +1,33 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Python bytecode & packaging
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Pytest & coverage temporary directories
+.pytest_cache/
+.pytest-tmp*/
+tmp_pytest*/
+test_zz_repro_*
+.coverage
+htmlcov/
+
+# Secrets & local environment overrides (NEVER commit API keys)
+.env
+.env.*
+!.env.example
+*credentials*.json
+*.key
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
