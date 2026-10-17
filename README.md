@@ -8,111 +8,96 @@ How Jev is used — whether for routing tasks across the agent's own models, cla
 
 ---
 
-## 1. Agent Self-Installation Playbook (For AI Agents Reading This Repo)
+## 1. Agent Self-Installation Playbook (Single Source of Truth — SSOT)
 
-If a user gives you this repository (or its URL `https://github.com/SykkoAtHome/MCP_Typesafe_JEV`) and asks you to install `typesafe-jev-mcp` for yourself, execute the steps below autonomously for your harness (**Claude Code**, **Google Antigravity**, or **OpenAI Codex**).
+> **CRITICAL SSOT RULE FOR AGENTS**:
+> The directory where the user cloned this repository (`<SSOT_DIR>`, e.g. `D:\code\MCP_Typesafe_JEV`) is the **Single Source of Truth (SSOT)** for every harness on the machine.
+> - **NEVER** clone duplicate copies of this repository into other project workspaces or into harness config folders (`~/.claude`, `~/.codex`, `~/.gemini`).
+> - **NEVER** copy source files across harnesses.
+> - `pip install -e <SSOT_DIR>` links `<SSOT_DIR>\.venv` directly to `<SSOT_DIR>\src\typesafe_jev_mcp` in-place, and `typesafe-jev-mcp install --harness ...` automatically resolves `sys.executable` inside `<SSOT_DIR>\.venv` and writes a lightweight command pointer into each harness's config file. Any edit or `git pull` inside `<SSOT_DIR>` immediately updates all harnesses at once.
 
-### Step 1: Clone (if needed) & Install the Python Package into `.venv`
+### Step 1: Locate (or Clone Once) the Canonical `<SSOT_DIR>` & Install Editable `.venv`
 
 **Windows (PowerShell):**
 ```powershell
-git clone https://github.com/SykkoAtHome/MCP_Typesafe_JEV.git
-uv venv MCP_Typesafe_JEV\.venv
-MCP_Typesafe_JEV\.venv\Scripts\python.exe -m pip install -e MCP_Typesafe_JEV
+$SSOT_DIR = "D:\code\MCP_Typesafe_JEV" # Or the path where the user cloned this repo
+if (-not (Test-Path "$SSOT_DIR\.git")) {
+    git clone https://github.com/SykkoAtHome/MCP_Typesafe_JEV.git "$SSOT_DIR"
+} else {
+    git -C "$SSOT_DIR" pull --ff-only
+}
+
+if (-not (Test-Path "$SSOT_DIR\.venv\Scripts\python.exe")) {
+    uv venv "$SSOT_DIR\.venv"
+}
+# Editable install (-e) links directly to $SSOT_DIR\src\typesafe_jev_mcp without copying files
+& "$SSOT_DIR\.venv\Scripts\python.exe" -m pip install -e "$SSOT_DIR"
 ```
 
 **macOS / Linux (Bash):**
 ```bash
-git clone https://github.com/SykkoAtHome/MCP_Typesafe_JEV.git
-uv venv MCP_Typesafe_JEV/.venv
-MCP_Typesafe_JEV/.venv/bin/python -m pip install -e MCP_Typesafe_JEV
-```
+SSOT_DIR="${SSOT_DIR:-$HOME/code/MCP_Typesafe_JEV}" # Or the path where the user cloned this repo
+if [ ! -d "$SSOT_DIR/.git" ]; then
+    git clone https://github.com/SykkoAtHome/MCP_Typesafe_JEV.git "$SSOT_DIR"
+else
+    git -C "$SSOT_DIR" pull --ff-only
+fi
 
-*(If `uv` is not installed, use `python -m venv .venv` instead.)*
+[ -x "$SSOT_DIR/.venv/bin/python" ] || uv venv "$SSOT_DIR/.venv"
+"$SSOT_DIR/.venv/bin/python" -m pip install -e "$SSOT_DIR"
+```
 
 ---
 
 ### Step 2: Check API Key Readiness (Never Read or Echo the Raw Key)
 
-Run the built-in diagnostic command:
+Run the built-in diagnostic command from `<SSOT_DIR>`:
 
 ```powershell
 # Windows
-.venv\Scripts\typesafe-jev-mcp.exe doctor
+& "$SSOT_DIR\.venv\Scripts\typesafe-jev-mcp.exe" doctor
 
 # macOS / Linux
-.venv/bin/typesafe-jev-mcp doctor
+"$SSOT_DIR/.venv/bin/typesafe-jev-mcp" doctor
 ```
 
 - **If `"configured": true` and `"upstream_ok": true`**: The user's TypeSafe API key is already stored in the OS user profile (`%APPDATA%\typesafe-jev-mcp\credentials.json` on Windows or `~/.config/typesafe-jev-mcp/credentials.json` on POSIX). **Proceed directly to Step 3 without asking the user for a key.**
 - **If `"configured": false`**: Ask the user to run the interactive hidden-input command once in their terminal (or pass `--api-key` if they provided one):
   ```powershell
-  .venv\Scripts\typesafe-jev-mcp.exe auth set-key
+  & "$SSOT_DIR\.venv\Scripts\typesafe-jev-mcp.exe" auth set-key
   ```
 
 ---
 
-### Step 3: Register the MCP Server in Your Harness
+### Step 3: Register the SSOT Pointer in Your Harness
 
-Choose the command matching your harness (or run `--harness all` to configure Claude Code, Antigravity, Codex, and Gemini CLI simultaneously):
+When you run `typesafe-jev-mcp install` from `<SSOT_DIR>\.venv`, it automatically records the exact absolute path to `<SSOT_DIR>\.venv` in the target harness configuration (zero file copying):
 
 #### A. Claude Code (`~/.claude.json` or project `.mcp.json`)
 - **Automated installer (User scope `~/.claude.json`):**
   ```powershell
-  .venv\Scripts\typesafe-jev-mcp.exe install --harness claude-code --scope user
-  ```
-- **Automated installer (Project scope `.mcp.json`):**
-  ```powershell
-  .venv\Scripts\typesafe-jev-mcp.exe install --harness claude-code --scope project
+  & "$SSOT_DIR\.venv\Scripts\typesafe-jev-mcp.exe" install --harness claude-code --scope user
   ```
 - **Or via native `claude` CLI:**
   ```powershell
-  claude mcp add --scope user typesafe-jev -- D:/code/MCP_Typesafe_JEV/.venv/Scripts/python.exe -m typesafe_jev_mcp serve
-  ```
-- **Manual JSON (`~/.claude.json` or `.mcp.json`):**
-  ```json
-  {
-    "mcpServers": {
-      "typesafe-jev": {
-        "command": "D:/code/MCP_Typesafe_JEV/.venv/Scripts/python.exe",
-        "args": ["-m", "typesafe_jev_mcp", "serve"]
-      }
-    }
-  }
+  claude mcp add --scope user typesafe-jev -- "$SSOT_DIR/.venv/Scripts/python.exe" -m typesafe_jev_mcp serve
   ```
 
 #### B. Google Antigravity (`~/.gemini/config/mcp_config.json`)
 - **Automated installer (safely merges into `~/.gemini/config/mcp_config.json` without overwriting other MCP servers):**
   ```powershell
-  .venv\Scripts\typesafe-jev-mcp.exe install --harness antigravity
-  ```
-- **Manual JSON (`~/.gemini/config/mcp_config.json`):**
-  ```json
-  {
-    "mcpServers": {
-      "typesafe-jev": {
-        "command": "D:/code/MCP_Typesafe_JEV/.venv/Scripts/python.exe",
-        "args": ["-m", "typesafe_jev_mcp", "serve"]
-      }
-    }
-  }
+  & "$SSOT_DIR\.venv\Scripts\typesafe-jev-mcp.exe" install --harness antigravity
   ```
 
 #### C. OpenAI Codex (`~/.codex/config.toml`)
 - **Automated installer (safely updates `[mcp_servers.typesafe-jev]` in `~/.codex/config.toml`):**
   ```powershell
-  .venv\Scripts\typesafe-jev-mcp.exe install --harness codex
-  ```
-- **Manual TOML (`~/.codex/config.toml`):**
-  ```toml
-  [mcp_servers.typesafe-jev]
-  command = "D:/code/MCP_Typesafe_JEV/.venv/Scripts/python.exe"
-  args = ["-m", "typesafe_jev_mcp", "serve"]
+  & "$SSOT_DIR\.venv\Scripts\typesafe-jev-mcp.exe" install --harness codex
   ```
 
-#### D. Install into All Harnesses at Once
+#### D. Install Pointer into All Harnesses at Once (Claude Code + Antigravity + Codex + Gemini CLI)
 ```powershell
-.venv\Scripts\typesafe-jev-mcp.exe install --harness all
+& "$SSOT_DIR\.venv\Scripts\typesafe-jev-mcp.exe" install --harness all
 ```
 
 ---
