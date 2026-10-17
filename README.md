@@ -81,12 +81,12 @@ Choose the command matching your harness (or run `--harness all` to configure Cl
   }
   ```
 
-#### B. Google Antigravity (`~/.gemini/antigravity/mcp_config.json`)
-- **Automated installer (safely merges into `~/.gemini/antigravity/mcp_config.json` without overwriting other MCP servers):**
+#### B. Google Antigravity (`~/.gemini/config/mcp_config.json`)
+- **Automated installer (safely merges into `~/.gemini/config/mcp_config.json` without overwriting other MCP servers):**
   ```powershell
   .venv\Scripts\typesafe-jev-mcp.exe install --harness antigravity
   ```
-- **Manual JSON (`~/.gemini/antigravity/mcp_config.json`):**
+- **Manual JSON (`~/.gemini/config/mcp_config.json`):**
   ```json
   {
     "mcpServers": {

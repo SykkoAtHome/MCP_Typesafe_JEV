@@ -94,7 +94,7 @@ def test_multi_harness_installer_writes_json_and_toml(tmp_path: Path) -> None:
     assert "typesafe-jev" in gemini_cfg["mcpServers"]
 
     agy_cfg = json.loads(
-        (tmp_path / ".gemini" / "antigravity" / "mcp_config.json").read_text(encoding="utf-8")
+        (tmp_path / ".gemini" / "config" / "mcp_config.json").read_text(encoding="utf-8")
     )
     assert "typesafe-jev" in agy_cfg["mcpServers"]
 

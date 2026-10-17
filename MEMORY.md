@@ -3,7 +3,7 @@
 ## STATE
 - **Project**: `typesafe-jev-mcp` — domain-agnostic, cross-harness MCP server implementing the TypeSafe Jev (`jev-latest` / `jev-preview`) System One evaluation API (`https://docs.typesafe.ai`).
 - **Status**: Implemented and verified with unit tests and live API integration tests.
-- **Supported Harnesses**: Claude Code (`.mcp.json` / `~/.claude.json`), OpenAI Codex (`~/.codex/config.toml`), Gemini CLI (`~/.gemini/settings.json`), and Google Antigravity (`~/.gemini/antigravity/mcp_config.json`).
+- **Supported Harnesses**: Claude Code (`.mcp.json` / `~/.claude.json`), OpenAI Codex (`~/.codex/config.toml`), Gemini CLI (`~/.gemini/settings.json`), and Google Antigravity (`~/.gemini/config/mcp_config.json`).
 - **Core MCP Tools**:
   - `jev_evaluate`: Parallel speculative fan-out (`POST /v1/systemone`) over any JSON/text `state` and dictionary of `questions` (`noul`, `choice`, `score`, `box`), with optional `assets`, `weights` for composite scoring, `confidence_threshold`, and `long_context`.
   - `jev_choice`: Single categorical choice across 1..255 agent-supplied options (`criteria`).

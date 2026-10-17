@@ -42,7 +42,7 @@ class HarnessConfigRepository:
         if harness == "gemini":
             return self._home / ".gemini" / "settings.json"
         if harness == "antigravity":
-            return self._home / ".gemini" / "antigravity" / "mcp_config.json"
+            return self._home / ".gemini" / "config" / "mcp_config.json"
         raise ConfigurationError(f"Unsupported harness: {harness}")
 
     @staticmethod
