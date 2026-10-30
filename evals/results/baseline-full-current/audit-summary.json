@@ -1,0 +1,514 @@
+{
+  "scope": "Full-baseline agent trials only, excluding canonical and absence-probe tracks. Totals include all actual attempts; no report.md was read.",
+  "usage_notes": [
+    "Agent tokens sum the final usage.total snapshot once per fresh thread. cachedInputTokens is a subset of inputTokens; reasoningOutputTokens is a subset of outputTokens.",
+    "Jev tokens sum one response.usage per successful evaluation call, not per answer in a batch. No token usage is inferred for failed calls.",
+    "Missing usage is counted explicitly; zero sums are valid only where no matching calls exist.",
+    "IoU uses predeclared 0.5 threshold against hidden manifest boxes. Raw Jev localization excludes failed calls and absent-object boxes; final localization includes each localization task regardless of tool usage."
+  ],
+  "criteria_audit_summary": {
+    "evaluation_calls": 148,
+    "json_schema_valid": 147,
+    "arguments_valid": 134,
+    "criteria_quality": {
+      "issue": 18,
+      "pass": 128,
+      "uncertain": 2
+    },
+    "evidence_modes": {
+      "agent_visual_summary": 7,
+      "not_applicable": 84,
+      "supplied_image": 51,
+      "missing_visual_evidence": 5,
+      "answer_bearing_criterion": 1
+    },
+    "by_arm": {
+      "descriptions": {
+        "calls": 51,
+        "arguments_invalid": 8,
+        "criteria_quality": {
+          "issue": 9,
+          "pass": 42
+        }
+      },
+      "guide": {
+        "calls": 48,
+        "arguments_invalid": 6,
+        "criteria_quality": {
+          "pass": 40,
+          "issue": 8
+        }
+      },
+      "skill": {
+        "calls": 49,
+        "arguments_invalid": 0,
+        "criteria_quality": {
+          "pass": 46,
+          "uncertain": 2,
+          "issue": 1
+        }
+      },
+      "no_jev": {
+        "calls": 0,
+        "arguments_invalid": 0,
+        "criteria_quality": {}
+      }
+    }
+  },
+  "by_arm": {
+    "descriptions": {
+      "trials": 60,
+      "completed": 60,
+      "agent_usage": {
+        "inputTokens": 1482049,
+        "outputTokens": 9025,
+        "cachedInputTokens": 1233536,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 1491074,
+        "rows_with_usage": 60,
+        "rows_missing_usage": 0
+      },
+      "jev_successful_call_usage": {
+        "input_tokens": 22042,
+        "output_tokens": 1408,
+        "successful_calls_with_usage": 45,
+        "successful_calls_missing_usage": 0
+      },
+      "evaluation_calls": 51,
+      "successful_evaluation_calls": 45,
+      "failed_evaluation_calls": 6,
+      "low_confidence_threshold": 0.6,
+      "low_confidence_calls": 3,
+      "low_confidence_trials": 3,
+      "deterministic_trials": 10,
+      "deterministic_trials_using_compute": 8,
+      "deterministic_compute_calls": 8,
+      "all_compute_calls": 8,
+      "failed_compute_calls": 0,
+      "strict_task_failures": 3,
+      "format_only_failures": 2,
+      "true_task_failures_excluding_format": 1,
+      "true_task_failure_details": [
+        {
+          "case_id": "deterministic_character_count",
+          "repeat": 0,
+          "answer": 25,
+          "attribution": "Agent sent the complete Input string wrapper to compute, which correctly counted 25; extraction of the requested string was wrong."
+        }
+      ],
+      "final_localization_iou": {
+        "count": 10,
+        "min": 0.8262059527882311,
+        "median": 0.9228480725623585,
+        "mean": 0.931840541923894,
+        "max": 1.0,
+        "at_least_0_5": 10
+      },
+      "successful_jev_localization_iou": {
+        "count": 7,
+        "min": 0.8262059527882311,
+        "median": 0.8881330309901738,
+        "mean": 0.8866483500327305,
+        "max": 0.9386666666666668,
+        "at_least_0_5": 7
+      },
+      "low_confidence_trial_details": [
+        {
+          "case_id": "image_color_shape_match",
+          "repeat": 1,
+          "confidence_values": [
+            0.23
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_locate_purple_square",
+          "repeat": 0,
+          "confidence_values": [
+            0.4
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_color_shape_match",
+          "repeat": 0,
+          "confidence_values": [
+            0.23
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        }
+      ]
+    },
+    "guide": {
+      "trials": 60,
+      "completed": 60,
+      "agent_usage": {
+        "inputTokens": 1505601,
+        "outputTokens": 8877,
+        "cachedInputTokens": 1241856,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 1514478,
+        "rows_with_usage": 60,
+        "rows_missing_usage": 0
+      },
+      "jev_successful_call_usage": {
+        "input_tokens": 22746,
+        "output_tokens": 1390,
+        "successful_calls_with_usage": 45,
+        "successful_calls_missing_usage": 0
+      },
+      "evaluation_calls": 48,
+      "successful_evaluation_calls": 45,
+      "failed_evaluation_calls": 3,
+      "low_confidence_threshold": 0.6,
+      "low_confidence_calls": 7,
+      "low_confidence_trials": 7,
+      "deterministic_trials": 10,
+      "deterministic_trials_using_compute": 9,
+      "deterministic_compute_calls": 9,
+      "all_compute_calls": 9,
+      "failed_compute_calls": 0,
+      "strict_task_failures": 3,
+      "format_only_failures": 0,
+      "true_task_failures_excluding_format": 3,
+      "true_task_failure_details": [
+        {
+          "case_id": "image_compare_blue_count",
+          "repeat": 0,
+          "answer": "A",
+          "attribution": "Agent final answer=A contradicts its own reason correcting to B; Jev chose B, but had no image evidence."
+        },
+        {
+          "case_id": "deterministic_character_count",
+          "repeat": 0,
+          "answer": 25,
+          "attribution": "Agent sent the complete Input string wrapper to compute, which correctly counted 25; extraction of the requested string was wrong."
+        },
+        {
+          "case_id": "image_compare_blue_count",
+          "repeat": 1,
+          "answer": "A",
+          "attribution": "Agent omitted image evidence from Jev, miscounted image B, then selected A; Jev tie was low-confidence and unsupported by pixels."
+        }
+      ],
+      "final_localization_iou": {
+        "count": 10,
+        "min": 0.8680555555555556,
+        "median": 0.9875749999999999,
+        "mean": 0.951852116687258,
+        "max": 1.0,
+        "at_least_0_5": 10
+      },
+      "successful_jev_localization_iou": {
+        "count": 7,
+        "min": 0.8680555555555556,
+        "median": 0.8967596081386583,
+        "mean": 0.8945429326994293,
+        "max": 0.9244992295839753,
+        "at_least_0_5": 7
+      },
+      "low_confidence_trial_details": [
+        {
+          "case_id": "image_leftmost_color",
+          "repeat": 0,
+          "confidence_values": [
+            0.51
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_compare_blue_count",
+          "repeat": 0,
+          "confidence_values": [
+            0.09
+          ],
+          "final_abstain": false,
+          "strict_task_passed": false
+        },
+        {
+          "case_id": "image_leftmost_color",
+          "repeat": 1,
+          "confidence_values": [
+            0.48
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_color_shape_match",
+          "repeat": 1,
+          "confidence_values": [
+            0.35
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_locate_purple_square",
+          "repeat": 0,
+          "confidence_values": [
+            0.55
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_compare_blue_count",
+          "repeat": 1,
+          "confidence_values": [
+            0.06
+          ],
+          "final_abstain": false,
+          "strict_task_passed": false
+        },
+        {
+          "case_id": "image_locate_purple_square",
+          "repeat": 1,
+          "confidence_values": [
+            0.45
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        }
+      ]
+    },
+    "skill": {
+      "trials": 60,
+      "completed": 60,
+      "agent_usage": {
+        "inputTokens": 1696831,
+        "outputTokens": 9444,
+        "cachedInputTokens": 1417600,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 1706275,
+        "rows_with_usage": 60,
+        "rows_missing_usage": 0
+      },
+      "jev_successful_call_usage": {
+        "input_tokens": 32786,
+        "output_tokens": 1624,
+        "successful_calls_with_usage": 49,
+        "successful_calls_missing_usage": 0
+      },
+      "evaluation_calls": 49,
+      "successful_evaluation_calls": 49,
+      "failed_evaluation_calls": 0,
+      "low_confidence_threshold": 0.6,
+      "low_confidence_calls": 4,
+      "low_confidence_trials": 4,
+      "deterministic_trials": 10,
+      "deterministic_trials_using_compute": 8,
+      "deterministic_compute_calls": 8,
+      "all_compute_calls": 8,
+      "failed_compute_calls": 0,
+      "strict_task_failures": 2,
+      "format_only_failures": 2,
+      "true_task_failures_excluding_format": 0,
+      "true_task_failure_details": [],
+      "final_localization_iou": {
+        "count": 10,
+        "min": 0.8613617719442166,
+        "median": 0.9036466350735216,
+        "mean": 0.9146147768728843,
+        "max": 1.0,
+        "at_least_0_5": 10
+      },
+      "successful_jev_localization_iou": {
+        "count": 10,
+        "min": 0.8613617719442166,
+        "median": 0.8996740334273057,
+        "mean": 0.8950595583965912,
+        "max": 0.9069767441860465,
+        "at_least_0_5": 10
+      },
+      "low_confidence_trial_details": [
+        {
+          "case_id": "ambiguous_absent_object",
+          "repeat": 1,
+          "confidence_values": [
+            0.94,
+            0.1
+          ],
+          "final_abstain": true,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_locate_yellow_rectangle",
+          "repeat": 0,
+          "confidence_values": [
+            0.59
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "ambiguous_absent_object",
+          "repeat": 0,
+          "confidence_values": [
+            0.94,
+            0.07
+          ],
+          "final_abstain": true,
+          "strict_task_passed": true
+        },
+        {
+          "case_id": "image_locate_purple_square",
+          "repeat": 1,
+          "confidence_values": [
+            0.47
+          ],
+          "final_abstain": false,
+          "strict_task_passed": true
+        }
+      ]
+    },
+    "no_jev": {
+      "trials": 60,
+      "completed": 60,
+      "agent_usage": {
+        "inputTokens": 671540,
+        "outputTokens": 2876,
+        "cachedInputTokens": 391424,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 674416,
+        "rows_with_usage": 60,
+        "rows_missing_usage": 0
+      },
+      "jev_successful_call_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "successful_calls_with_usage": 0,
+        "successful_calls_missing_usage": 0
+      },
+      "evaluation_calls": 0,
+      "successful_evaluation_calls": 0,
+      "failed_evaluation_calls": 0,
+      "low_confidence_threshold": 0.6,
+      "low_confidence_calls": 0,
+      "low_confidence_trials": 0,
+      "deterministic_trials": 10,
+      "deterministic_trials_using_compute": 0,
+      "deterministic_compute_calls": 0,
+      "all_compute_calls": 1,
+      "failed_compute_calls": 1,
+      "strict_task_failures": 3,
+      "format_only_failures": 3,
+      "true_task_failures_excluding_format": 0,
+      "true_task_failure_details": [],
+      "final_localization_iou": {
+        "count": 10,
+        "min": 0.9716326530612245,
+        "median": 1.0,
+        "mean": 0.9893577806122449,
+        "max": 1.0,
+        "at_least_0_5": 10
+      },
+      "successful_jev_localization_iou": {
+        "count": 0,
+        "min": null,
+        "median": null,
+        "mean": null,
+        "max": null,
+        "at_least_0_5": 0
+      },
+      "low_confidence_trial_details": []
+    }
+  },
+  "format_only_cases": [
+    {
+      "case_id": "text_theme_classification",
+      "arm": "skill",
+      "repeat": 1,
+      "answer": 3,
+      "note": "Known numeric identifier/null-abstention correction, or equivalent color-name capitalization; not a true task error."
+    },
+    {
+      "case_id": "text_theme_classification",
+      "arm": "descriptions",
+      "repeat": 1,
+      "answer": 3,
+      "note": "Known numeric identifier/null-abstention correction, or equivalent color-name capitalization; not a true task error."
+    },
+    {
+      "case_id": "text_theme_classification",
+      "arm": "no_jev",
+      "repeat": 0,
+      "answer": 3,
+      "note": "Known numeric identifier/null-abstention correction, or equivalent color-name capitalization; not a true task error."
+    },
+    {
+      "case_id": "text_theme_classification",
+      "arm": "descriptions",
+      "repeat": 0,
+      "answer": 3,
+      "note": "Known numeric identifier/null-abstention correction, or equivalent color-name capitalization; not a true task error."
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "no_jev",
+      "repeat": 0,
+      "answer": null,
+      "note": "Known numeric identifier/null-abstention correction, or equivalent color-name capitalization; not a true task error."
+    },
+    {
+      "case_id": "text_theme_classification",
+      "arm": "no_jev",
+      "repeat": 1,
+      "answer": 3,
+      "note": "Known numeric identifier/null-abstention correction, or equivalent color-name capitalization; not a true task error."
+    },
+    {
+      "case_id": "image_leftmost_color",
+      "arm": "skill",
+      "repeat": 0,
+      "answer": "Yellow",
+      "note": "Known numeric identifier/null-abstention correction, or equivalent color-name capitalization; not a true task error."
+    }
+  ],
+  "overall": {
+    "trials": 240,
+    "evaluation_calls": 148,
+    "compute_calls": 26,
+    "deterministic_compute_calls": 25,
+    "deterministic_trials": 40,
+    "true_task_failures_excluding_format": 4,
+    "format_only_failures": 7,
+    "agent_usage_totals": {
+      "inputTokens": 5356021,
+      "outputTokens": 30222,
+      "cachedInputTokens": 4284416,
+      "reasoningOutputTokens": 0,
+      "totalTokens": 5386243
+    },
+    "jev_successful_call_usage_totals": {
+      "input_tokens": 77574,
+      "output_tokens": 4422
+    }
+  },
+  "important_attribution": [
+    "No observed wrong task answer from Jev with a complete, appropriately supplied visual input was found in these actual calls. Unsupported no-image guesses are not visual quality measurements.",
+    "Two absent-target box outputs are spurious low-confidence regions despite correct presence=false. Agents discard them; this is not a successful conditional-absence box API guarantee.",
+    "One no-Jev image_color_shape_match trial unnecessarily called compute(arithmetic,{}) and received a TypeError, then still answered the image task correctly.",
+    "The two wrapper-count calls return 25 correctly for their supplied data; the agent extracted the wrong input."
+  ],
+  "code_review_findings": [],
+  "code_review_status": "Reported resume-evidence overwrite and score-replay response-shape findings were fixed and rechecked. No remaining P1/P2 identified in the requested code scope. Focused read-only checks verified frozen-manifest resume avoids rasterization and score replay uses index-keyed maps with a non-degenerate low-confidence posterior.",
+  "resolved_code_review_findings": [
+    {
+      "priority": "P2",
+      "file": "evals/run.py",
+      "status": "resolved",
+      "verification": "prepare_cases reads the frozen manifest when resume=True; the identity gate runs before resource snapshot writes. A mock rasterizer that raises was not invoked."
+    },
+    {
+      "priority": "P2",
+      "file": "evals/robustness.py",
+      "status": "resolved",
+      "verification": "score replay now returns probability/legend maps keyed by string indices; low-confidence score posterior is .51/.49, with consistent score .49 and normalized value."
+    }
+  ]
+}

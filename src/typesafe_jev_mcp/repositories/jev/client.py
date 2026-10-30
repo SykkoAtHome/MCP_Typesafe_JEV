@@ -18,6 +18,7 @@ from typesafe_jev_mcp.errors import (
     ValidationError,
     redact_secrets,
 )
+from typesafe_jev_mcp.repositories.jev.images import MultipartFiles, prepare_image_upload
 
 DEFAULT_BASE_URL = "https://api.typesafe.ai"
 DEFAULT_TIMEOUT_SECONDS = 15.0
@@ -55,13 +56,17 @@ class JevGateway:
             enable_images=request.enable_images,
         )
         payload = request.to_api_payload()
+        files = await asyncio.to_thread(prepare_image_upload, payload)
+        if files:
+            headers.pop("Content-Type")
 
         started = time.perf_counter()
         raw_json = await self._request_json(
             method="POST",
             path="/v1/systemone",
             headers=headers,
-            json_body=payload,
+            json_body=None if files else payload,
+            files=files,
         )
         elapsed_ms = round((time.perf_counter() - started) * 1000.0, 2)
         raw_json["latency_ms"] = elapsed_ms
@@ -134,15 +139,16 @@ class JevGateway:
         path: str,
         headers: dict[str, str],
         json_body: dict[str, Any] | None,
+        files: MultipartFiles | None = None,
     ) -> dict[str, Any]:
         url = f"{self._base_url}{path}"
         if self._external_client is not None:
             return await self._send_with_retries(
-                self._external_client, method=method, url=url, headers=headers, json_body=json_body
+                self._external_client, method=method, url=url, headers=headers, json_body=json_body, files=files
             )
         async with httpx.AsyncClient(timeout=self._timeout) as client:
             return await self._send_with_retries(
-                client, method=method, url=url, headers=headers, json_body=json_body
+                client, method=method, url=url, headers=headers, json_body=json_body, files=files
             )
 
     async def _send_with_retries(
@@ -153,10 +159,11 @@ class JevGateway:
         url: str,
         headers: dict[str, str],
         json_body: dict[str, Any] | None,
+        files: MultipartFiles | None = None,
     ) -> dict[str, Any]:
         for attempt in range(MAX_RETRIES + 1):
             try:
-                response = await client.request(method, url, headers=headers, json=json_body)
+                response = await client.request(method, url, headers=headers, json=json_body, files=files)
             except httpx.HTTPError as exc:
                 raise UpstreamApiError(
                     f"Network error contacting TypeSafe API: {redact_secrets(str(exc))}"

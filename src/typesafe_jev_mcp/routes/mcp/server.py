@@ -10,6 +10,7 @@ except ImportError:
     from mcp.server.fastmcp import FastMCP as MCPServer  # type: ignore[no-redef]
 
 from typesafe_jev_mcp.routes.mcp.prompts import register_prompts_and_resources
+from typesafe_jev_mcp.routes.mcp.guidance import DECISION_GUIDANCE
 from typesafe_jev_mcp.routes.mcp.tools import register_tools
 from typesafe_jev_mcp.services.evaluation import EvaluationService
 
@@ -18,7 +19,10 @@ SERVER_INSTRUCTIONS = (
     "of `noul` (yes/no probability), `choice` (1..255 options), `score` (2..10 rubric levels), "
     "or `box` questions over any JSON/text `state` in a single ~100ms call. "
     "For question design patterns and System One best practices, read the embedded skill resource "
-    "`jev://skill` (or compact `jev://guide`) on demand."
+    "`jev://skill` (or compact `jev://guide`) on demand. "
+    "Use deterministic code for exact arithmetic, text/structured-data counting, parsing, and lookup. "
+    "For visual evaluation, attach the image in assets with matching string references. "
+    "Use neutral criteria and represent missing evidence explicitly. " + DECISION_GUIDANCE
 )
 
 

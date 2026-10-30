@@ -1,0 +1,30 @@
+{
+  "meta": null,
+  "protocol_version": "2025-11-25",
+  "capabilities": {
+    "experimental": null,
+    "logging": null,
+    "prompts": {
+      "list_changed": false
+    },
+    "resources": {
+      "subscribe": false,
+      "list_changed": false
+    },
+    "tools": {
+      "list_changed": false
+    },
+    "completions": null,
+    "extensions": null,
+    "tasks": null
+  },
+  "server_info": {
+    "name": "typesafe-jev",
+    "title": null,
+    "version": "",
+    "description": null,
+    "website_url": null,
+    "icons": null
+  },
+  "instructions": "TypeSafe Jev (System One) evaluation server. Use `jev_evaluate` to run parallel batches of `noul` (yes/no probability), `choice` (1..255 options), `score` (2..10 rubric levels), or `box` questions over any JSON/text `state` in a single ~100ms call. For question design patterns and System One best practices, read the embedded skill resource `jev://skill` (or compact `jev://guide`) on demand. Use deterministic code for exact arithmetic, text/structured-data counting, parsing, and lookup. For visual evaluation, attach the image in assets with matching string references. Use neutral criteria and represent missing evidence explicitly. Before acting, check that the necessary evidence was supplied. With low confidence, obtain missing input, verify independently, or abstain; choose a threshold only with an explicit fallback. High confidence and valid JSON do not establish correctness. Keep the final identifier consistent with the decision you support; explain an evidence-based override instead of silently changing the selected option. On validation errors or HTTP 400, check required arguments and exact asset references before retrying; changing path separators does not repair a reference mismatch. If an upstream failure persists, report that evaluation is unavailable rather than inventing a result."
+}

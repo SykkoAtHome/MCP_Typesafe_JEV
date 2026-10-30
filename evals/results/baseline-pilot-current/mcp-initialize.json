@@ -1,0 +1,30 @@
+{
+  "meta": null,
+  "protocol_version": "2025-11-25",
+  "capabilities": {
+    "experimental": null,
+    "logging": null,
+    "prompts": {
+      "list_changed": false
+    },
+    "resources": {
+      "subscribe": false,
+      "list_changed": false
+    },
+    "tools": {
+      "list_changed": false
+    },
+    "completions": null,
+    "extensions": null,
+    "tasks": null
+  },
+  "server_info": {
+    "name": "typesafe-jev",
+    "title": null,
+    "version": "",
+    "description": null,
+    "website_url": null,
+    "icons": null
+  },
+  "instructions": "TypeSafe Jev (System One) evaluation server. Use `jev_evaluate` to run parallel batches of `noul` (yes/no probability), `choice` (1..255 options), `score` (2..10 rubric levels), or `box` questions over any JSON/text `state` in a single ~100ms call. For question design patterns and System One best practices, read the embedded skill resource `jev://skill` (or compact `jev://guide`) on demand."
+}

@@ -1,0 +1,240 @@
+[
+  {
+    "id": "text_rubric_priority",
+    "category": "text",
+    "task": "Obtain an independent external assessment of this ticket's urgency from 0 (lowest) to 4 (highest) using the rubric. Return the assessment's numeric score.",
+    "state": "Priority rubric: 0=cosmetic/lowest, 1=minor inconvenience, 2=moderate interruption, 3=major interruption, 4=safety-critical/highest. Ticket: 'The dashboard logo is 4 pixels too low; all controls work.'",
+    "assets": {},
+    "expected": {
+      "answer": 0
+    },
+    "grading": {
+      "kind": "numeric"
+    },
+    "jev": "required",
+    "acceptable_strategies": [
+      "rubric_scoring",
+      "jev_score"
+    ],
+    "oracle": "The issue is cosmetic and functionality remains intact, matching the rubric's lowest-priority class.",
+    "canonical": {
+      "tool": "jev_score",
+      "arguments": {
+        "state": "Priority rubric: 0=cosmetic/lowest, 1=minor inconvenience, 2=moderate interruption, 3=major interruption, 4=safety-critical/highest. Ticket: 'The dashboard logo is 4 pixels too low; all controls work.'",
+        "instructions": "How urgent is this ticket from 0 to 4?",
+        "criteria": [
+          "0 cosmetic/low",
+          "1 minor inconvenience",
+          "2 moderate interruption",
+          "3 major interruption",
+          "4 safety-critical"
+        ]
+      }
+    }
+  },
+  {
+    "id": "image_color_shape_match",
+    "category": "image",
+    "task": "Which object is a circle? Return A, B, or C.",
+    "state": "Image reference: scene_02. Objects: A=yellow object, B=blue object, C=gray object.",
+    "assets": {
+      "scene_02": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_02.png"
+      }
+    },
+    "expected": {
+      "answer": "B"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_recognition",
+      "jev_choice"
+    ],
+    "oracle": "The blue circle is the only circular object.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Image reference: scene_02. Objects: A=yellow object, B=blue object, C=gray object.",
+        "instructions": "Which object is a circle?",
+        "criteria": {
+          "A": "Yellow object",
+          "B": "Blue object",
+          "C": "Gray object"
+        },
+        "assets": {
+          "scene_02": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_02.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_compare_blue_count",
+    "category": "image",
+    "task": "Which image contains more blue objects? Return A or B.",
+    "state": "Images: scene_04a and scene_04b. Count all blue objects in each image.",
+    "assets": {
+      "scene_04a": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_04a.png"
+      },
+      "scene_04b": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_04b.png"
+      }
+    },
+    "expected": {
+      "answer": "B"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "cross_image_comparison",
+      "jev_choice"
+    ],
+    "oracle": "Image A has two blue circles. Image B has a blue circle, a blue rectangle, and another blue circle, so it has three blue objects.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Images: scene_04a and scene_04b. Count all blue objects in each image.",
+        "instructions": "Which image contains more blue objects?",
+        "criteria": {
+          "A": "First image",
+          "B": "Second image"
+        },
+        "assets": {
+          "scene_04a": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_04a.png"
+          },
+          "scene_04b": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_04b.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_locate_blue_circle",
+    "category": "image",
+    "task": "Locate the blue circle and return its normalized bounding box.",
+    "state": "Image reference: scene_07. Locate the blue circle.",
+    "assets": {
+      "scene_07": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_07.png"
+      }
+    },
+    "expected": {
+      "answer": "blue_circle",
+      "box": {
+        "top": 0.025,
+        "bottom": 0.225,
+        "left": 0.45,
+        "right": 0.65
+      }
+    },
+    "grading": {
+      "kind": "box"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_localization",
+      "jev_box"
+    ],
+    "oracle": "The blue circle's drawn extent is x=180..260 and y=10..90 pixels. Coordinates are normalized by the 400-pixel image dimensions.",
+    "canonical": {
+      "tool": "jev_box",
+      "arguments": {
+        "state": "Image reference: scene_07. Locate the blue circle.",
+        "assets": {
+          "scene_07": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_07.png"
+          }
+        },
+        "instructions": "Return the normalized bounding box [top, bottom, left, right] for the blue circle in image scene_07."
+      }
+    }
+  },
+  {
+    "id": "ambiguous_conflicting_reviewers",
+    "category": "ambiguous",
+    "task": "Can you determine whether the claim is supported from the provided evidence? If the evidence conflicts or is missing, answer unknown and abstain.",
+    "state": "Two independent reviewers assess whether a claim is supported by a cited paragraph. Reviewer A says the claim is directly supported and assigns probability 0.9. Reviewer B says the paragraph contradicts the claim and assigns probability 0.1. The paragraph itself is unavailable.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "abstain": true,
+      "accepted_answers": [
+        "unknown",
+        null
+      ]
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "conflict_detection",
+      "evidence_check",
+      "abstention"
+    ],
+    "oracle": "The reviewers directly conflict and the cited paragraph is unavailable, so the claim cannot be resolved.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Two independent reviewers assess whether a claim is supported by a cited paragraph. Reviewer A says the claim is directly supported and assigns probability 0.9. Reviewer B says the paragraph contradicts the claim and assigns probability 0.1. The paragraph itself is unavailable.",
+        "instructions": "Can the claim's support be determined from the conflicting reports?",
+        "criteria": {
+          "supported": "The evidence supports the claim",
+          "unsupported": "The evidence contradicts the claim",
+          "unknown": "The evidence is insufficient or conflicting"
+        }
+      }
+    }
+  },
+  {
+    "id": "ambiguous_absent_object",
+    "category": "ambiguous",
+    "task": "Is a pink star present? Answer present or absent. If absent, return no box and abstain; if present, return its normalized bounding box.",
+    "state": "Image reference: scene_11. Inspect the image for a pink star.",
+    "assets": {
+      "scene_11": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_11.png"
+      }
+    },
+    "expected": {
+      "answer": "absent",
+      "abstain": true
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "object_presence_check",
+      "jev_choice",
+      "optional_localization",
+      "abstention"
+    ],
+    "oracle": "The image contains a blue circle, a red rectangle, and a green circle; no pink star is present.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Image reference: scene_11. Inspect the image for a pink star.",
+        "assets": {
+          "scene_11": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-pilot\\assets\\scene_11.png"
+          }
+        },
+        "instructions": "Is a pink star present?",
+        "criteria": {
+          "present": "A pink star is visible",
+          "absent": "No pink star is visible"
+        }
+      }
+    }
+  }
+]

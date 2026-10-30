@@ -1,0 +1,240 @@
+{"case_id": "image_compare_red_circle", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_semantic_match", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_character_count", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_binary_conversion", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_red_circle", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_leftmost_color", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": false}
+{"case_id": "image_color_shape_match", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_red_square", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "skill", "repeat": 1, "strict_grade": {"passed": false}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": true}
+{"case_id": "image_locate_blue_circle", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.90702947845805}, "task_grade": {"passed": true, "iou": 0.90702947845805}, "format_rule": null, "changed": false}
+{"case_id": "text_study_design", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_semantic_match", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_binary_conversion", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.8262059527882311}, "task_grade": {"passed": true, "iou": 0.8262059527882311}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_leftmost_color", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": false}
+{"case_id": "deterministic_sort", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_character_count", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_character_count", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_color_shape_match", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_blue_circle", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.9069212410501193}, "task_grade": {"passed": true, "iou": 0.9069212410501193}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_semantic_match", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_binary_conversion", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_study_design", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_sentiment_mixed", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_red_square", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "text_semantic_match", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_aspect_sentiment", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "guide", "repeat": 0, "strict_grade": {"passed": false}, "task_grade": {"passed": false}, "format_rule": null, "changed": false}
+{"case_id": "image_count_green_circles", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_aspect_sentiment", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_leftmost_color", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_headline_ranking", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.9716326530612245}, "task_grade": {"passed": true, "iou": 0.9716326530612245}, "format_rule": null, "changed": false}
+{"case_id": "text_aspect_sentiment", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_sort", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_headline_ranking", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": false}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": true}
+{"case_id": "text_headline_ranking", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_study_design", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0.02}, "task_grade": {"passed": true, "absolute_error": 0.02}, "format_rule": null, "changed": false}
+{"case_id": "text_aspect_sentiment", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_study_design", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.8715265247203169}, "task_grade": {"passed": true, "iou": 0.8715265247203169}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_blue_circle", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.9069767441860465}, "task_grade": {"passed": true, "iou": 0.9069767441860465}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_character_count", "arm": "guide", "repeat": 0, "strict_grade": {"passed": false}, "task_grade": {"passed": false}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": false}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": true}
+{"case_id": "image_count_green_circles", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_locate_red_square", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "image_color_shape_match", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_sentiment_mixed", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "image_color_shape_match", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": false}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": true}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_semantic_match", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_sort", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "guide", "repeat": 1, "strict_grade": {"passed": false}, "task_grade": {"passed": false}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_compare_red_circle", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "image_count_green_circles", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_binary_conversion", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "text_sentiment_mixed", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.9386666666666668}, "task_grade": {"passed": true, "iou": 0.9386666666666668}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_color_shape_match", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_leftmost_color", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": false}
+{"case_id": "text_study_design", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_aspect_sentiment", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_red_square", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": false}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": true}
+{"case_id": "text_aspect_sentiment", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_red_square", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.8680555555555556}, "task_grade": {"passed": true, "iou": 0.8680555555555556}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_blue_circle", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.97515625}, "task_grade": {"passed": true, "iou": 0.97515625}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_character_count", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": false}, "task_grade": {"passed": false}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_red_square", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.8680555555555556}, "task_grade": {"passed": true, "iou": 0.8680555555555556}, "format_rule": null, "changed": false}
+{"case_id": "text_sentiment_mixed", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_sort", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.8959999999999998}, "task_grade": {"passed": true, "iou": 0.8959999999999998}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_red_circle", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_sentiment_mixed", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_count_green_circles", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.9716326530612245}, "task_grade": {"passed": true, "iou": 0.9716326530612245}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_blue_circle", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.97515625}, "task_grade": {"passed": true, "iou": 0.97515625}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0.04}, "task_grade": {"passed": true, "absolute_error": 0.04}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_binary_conversion", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_sentiment_mixed", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_red_square", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.8613617719442166}, "task_grade": {"passed": true, "iou": 0.8613617719442166}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_sort", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_study_design", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_semantic_match", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_count_green_circles", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.8954678362573093}, "task_grade": {"passed": true, "iou": 0.8954678362573093}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_headline_ranking", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_binary_conversion", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_leftmost_color", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": false}
+{"case_id": "deterministic_sort", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.8967596081386583}, "task_grade": {"passed": true, "iou": 0.8967596081386583}, "format_rule": null, "changed": false}
+{"case_id": "image_count_green_circles", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_count_green_circles", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_headline_ranking", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_aspect_sentiment", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_sentiment_mixed", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_sort", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": false}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": true}
+{"case_id": "text_sentiment_mixed", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_absent_object", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_headline_ranking", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_semantic_match", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_headline_ranking", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_character_count", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.8720714020081812}, "task_grade": {"passed": true, "iou": 0.8720714020081812}, "format_rule": null, "changed": false}
+{"case_id": "text_aspect_sentiment", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_color_shape_match", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_color_shape_match", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.9058509624547355}, "task_grade": {"passed": true, "iou": 0.9058509624547355}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_policy_eligibility", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_similar_options", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_leftmost_color", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_sort", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "image_leftmost_color", "arm": "skill", "repeat": 0, "strict_grade": {"passed": false}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": true}
+{"case_id": "deterministic_binary_conversion", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "text_study_design", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_purple_square", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_red_square", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.9014423076923077}, "task_grade": {"passed": true, "iou": 0.9014423076923077}, "format_rule": null, "changed": false}
+{"case_id": "text_rubric_priority", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "text_entailment", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_notes", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_locate_blue_circle", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.9751499999999997}, "task_grade": {"passed": true, "iou": 0.9751499999999997}, "format_rule": null, "changed": false}
+{"case_id": "text_headline_ranking", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_rank_material", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_red_circle", "arm": "no_jev", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_leftmost_color", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "color_label_case", "changed": false}
+{"case_id": "deterministic_character_count", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_theme_classification", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "numeric_response_identifier", "changed": false}
+{"case_id": "image_locate_blue_circle", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.9069767441860465}, "task_grade": {"passed": true, "iou": 0.9069767441860465}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_red_circle", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_yellow_rectangle", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true, "iou": 1.0}, "task_grade": {"passed": true, "iou": 1.0}, "format_rule": null, "changed": false}
+{"case_id": "text_study_design", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_reviewers", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "deterministic_character_count", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_median", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true, "absolute_error": 0}, "task_grade": {"passed": true, "absolute_error": 0}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_red_circle", "arm": "guide", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "skill", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_compare_blue_count", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_blue_circle", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true, "iou": 0.90702947845805}, "task_grade": {"passed": true, "iou": 0.90702947845805}, "format_rule": null, "changed": false}
+{"case_id": "image_color_shape_match", "arm": "skill", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_binary_conversion", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "image_locate_green_circle", "arm": "descriptions", "repeat": 0, "strict_grade": {"passed": true, "iou": 0.8715265247203169}, "task_grade": {"passed": true, "iou": 0.8715265247203169}, "format_rule": null, "changed": false}
+{"case_id": "image_count_green_circles", "arm": "no_jev", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "ambiguous_conflicting_receipts", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": "null_abstention", "changed": false}
+{"case_id": "image_compare_red_circle", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "deterministic_code_trace", "arm": "guide", "repeat": 0, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}
+{"case_id": "text_semantic_match", "arm": "descriptions", "repeat": 1, "strict_grade": {"passed": true}, "task_grade": {"passed": true}, "format_rule": null, "changed": false}

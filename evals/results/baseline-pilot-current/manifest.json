@@ -1,0 +1,206 @@
+[
+  {
+    "id": "text_sentiment_mixed",
+    "category": "text",
+    "task": "Classify the customer's overall sentiment as positive, neutral, or negative. Return exactly one label.",
+    "state": "Message: 'The package arrived two days late. A shipping refund does not make up for the terrible delay, and I would not order again.'",
+    "assets": {},
+    "expected": {
+      "answer": "negative"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "direct_classification",
+      "jev_noul"
+    ],
+    "oracle": "The customer explicitly calls the delay terrible and says they would not order again.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Message: 'The package arrived two days late. A shipping refund does not make up for the terrible delay, and I would not order again.'",
+        "instructions": "Choose the overall sentiment label.",
+        "criteria": {
+          "positive": "Overall positive",
+          "neutral": "Overall neutral",
+          "negative": "Overall negative"
+        }
+      }
+    }
+  },
+  {
+    "id": "text_rubric_priority",
+    "category": "text",
+    "task": "Obtain an independent external assessment of this ticket's urgency from 0 (lowest) to 4 (highest) using the rubric. Return the assessment's numeric score.",
+    "state": "Priority rubric: 0=cosmetic/lowest, 1=minor inconvenience, 2=moderate interruption, 3=major interruption, 4=safety-critical/highest. Ticket: 'The dashboard logo is 4 pixels too low; all controls work.'",
+    "assets": {},
+    "expected": {
+      "answer": 0
+    },
+    "grading": {
+      "kind": "numeric"
+    },
+    "jev": "required",
+    "acceptable_strategies": [
+      "rubric_scoring",
+      "jev_score"
+    ],
+    "oracle": "The issue is cosmetic and functionality remains intact, matching the rubric's lowest-priority class.",
+    "canonical": {
+      "tool": "jev_score",
+      "arguments": {
+        "state": "Priority rubric: 0=cosmetic/lowest, 1=minor inconvenience, 2=moderate interruption, 3=major interruption, 4=safety-critical/highest. Ticket: 'The dashboard logo is 4 pixels too low; all controls work.'",
+        "instructions": "How urgent is this ticket from 0 to 4?",
+        "criteria": [
+          "0 cosmetic/low",
+          "1 minor inconvenience",
+          "2 moderate interruption",
+          "3 major interruption",
+          "4 safety-critical"
+        ]
+      }
+    }
+  },
+  {
+    "id": "image_count_green_circles",
+    "category": "image",
+    "task": "How many green circles are in the image? Return the matching count identifier as a string: '1', '2', '3', or '4'.",
+    "state": "Image reference: scene_01. Count only the green circles.",
+    "assets": {
+      "scene_01": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-pilot-current\\assets\\scene_01.png"
+      }
+    },
+    "expected": {
+      "answer": "3"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_counting",
+      "jev_choice"
+    ],
+    "oracle": "Three green circles are visible near the top; a red square is a distractor.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Image reference: scene_01. Count only the green circles.",
+        "instructions": "Select the answer supported by the visual evidence.",
+        "criteria": {
+          "1": "One green circle",
+          "2": "Two green circles",
+          "3": "Three green circles",
+          "4": "Four green circles"
+        },
+        "assets": {
+          "scene_01": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-pilot-current\\assets\\scene_01.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_locate_blue_circle",
+    "category": "image",
+    "task": "Locate the blue circle and return its normalized bounding box.",
+    "state": "Image reference: scene_07. Locate the blue circle.",
+    "assets": {
+      "scene_07": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-pilot-current\\assets\\scene_07.png"
+      }
+    },
+    "expected": {
+      "answer": "blue_circle",
+      "box": {
+        "top": 0.025,
+        "bottom": 0.225,
+        "left": 0.45,
+        "right": 0.65
+      }
+    },
+    "grading": {
+      "kind": "box"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_localization",
+      "jev_box"
+    ],
+    "oracle": "The blue circle's drawn extent is x=180..260 and y=10..90 pixels. Coordinates are normalized by the 400-pixel image dimensions.",
+    "canonical": {
+      "tool": "jev_box",
+      "arguments": {
+        "state": "Image reference: scene_07. Locate the blue circle.",
+        "assets": {
+          "scene_07": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-pilot-current\\assets\\scene_07.png"
+          }
+        },
+        "instructions": "Return the normalized bounding box [top, bottom, left, right] for the blue circle in image scene_07."
+      }
+    }
+  },
+  {
+    "id": "ambiguous_conflicting_reviewers",
+    "category": "ambiguous",
+    "task": "Can you determine whether the claim is supported from the provided evidence? If the evidence conflicts or is missing, answer unknown and abstain.",
+    "state": "Two independent reviewers assess whether a claim is supported by a cited paragraph. Reviewer A says the claim is directly supported and assigns probability 0.9. Reviewer B says the paragraph contradicts the claim and assigns probability 0.1. The paragraph itself is unavailable.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "abstain": true
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "conflict_detection",
+      "evidence_check",
+      "abstention"
+    ],
+    "oracle": "The reviewers directly conflict and the cited paragraph is unavailable, so the claim cannot be resolved.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Two independent reviewers assess whether a claim is supported by a cited paragraph. Reviewer A says the claim is directly supported and assigns probability 0.9. Reviewer B says the paragraph contradicts the claim and assigns probability 0.1. The paragraph itself is unavailable.",
+        "instructions": "Can the claim's support be determined from the conflicting reports?",
+        "criteria": {
+          "supported": "The evidence supports the claim",
+          "unsupported": "The evidence contradicts the claim",
+          "unknown": "The evidence is insufficient or conflicting"
+        }
+      }
+    }
+  },
+  {
+    "id": "deterministic_sort",
+    "category": "deterministic",
+    "task": "Return the input numbers sorted in ascending order as a JSON array.",
+    "state": "Input: [4, 1, 4, 2].",
+    "assets": {},
+    "expected": {
+      "answer": [
+        1,
+        2,
+        4,
+        4
+      ]
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "unnecessary",
+    "acceptable_strategies": [
+      "direct_computation",
+      "code_execution"
+    ],
+    "oracle": "Sorting the four supplied integers gives 1, 2, 4, 4.",
+    "canonical": null
+  }
+]

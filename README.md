@@ -132,9 +132,40 @@ Credentials are resolved in the following order:
 | **`jev_choice`** | Single categorical `choice` question (picks 1 of up to 255 agent-supplied options in `criteria`, returning `choice`, `probabilities`, and `confidence`). |
 | **`jev_score`** | Single ordinal `score` rubric question (2 to 10 ordered rubric levels in `criteria`, returning `score`, `normalized` in `[0, 1]`, `probabilities`, `legend`, and `confidence`). |
 | **`jev_noul`** | Single binary `noul` probability question (returning `noul` in `[0, 1]`, `verdict`, and derived `confidence = \|2p - 1\|`). |
-| **`jev_box`** | Single bounding-box `box` question (`jev-preview`) over base64 image `assets` (280..1568 px), returning normalized `top`, `bottom`, `left`, `right` coordinates and `confidence`. |
+| **`jev_box`** | Single bounding-box `box` question (`jev-latest`, Jev 1.14+) over local or base64 image `assets` (280..1568 px), returning normalized `top`, `bottom`, `left`, `right` coordinates and `confidence`. |
 | **`jev_status`** | Safe diagnostic check returning masked API key status, key fingerprint, latency, and available Jev models (`jev-latest`, `jev-preview`). |
-| **`jev://skill` / `jev://guide`** | Embedded official TypeSafe Agent Skill (`SKILL.md`) and quick-reference guide exposed as on-demand MCP Resources & Prompts (`typesafe_ai_skill`, `jev_usage_guide`) with zero token overhead on tool calls. |
+| **`jev://skill` / `jev://guide`** | MCP-adapted TypeSafe Agent Skill and quick-reference guide, with complete request examples, exposed as on-demand Resources & Prompts (`typesafe_ai_skill`, `jev_usage_guide`). Resource contents are not repeated in tool responses. |
+
+### Images: local files or inline base64
+
+All evaluation tools (`jev_evaluate`, `jev_noul`, `jev_choice`, `jev_score`, `jev_box`) accept images. For a local file, pass its **absolute path on the MCP server host**. The server uploads the bytes to TypeSafe using multipart; the local path is not sent in the API payload. Only select files intended for evaluation.
+
+Example `jev_evaluate` arguments (replace the path with an existing image):
+
+```json
+{
+  "state": {"photo": "2af4a6bd-2d30-4b70-b750-93739757e3e0"},
+  "assets": {
+    "2af4a6bd-2d30-4b70-b750-93739757e3e0": {"path": "D:/images/photo.png"}
+  },
+  "questions": {
+    "present": {"type": "noul", "instructions": "Is there a red object in `photo`?"},
+    "location": {"type": "box", "instructions": "the red object in `photo`"}
+  }
+}
+```
+
+Existing base64 callers remain supported: replace the asset value with `{"type": "image", "format": "png", "data_base64": "<raw_base64>"}`. Use `png`, `jpg`, or `jpeg`, standard padded base64 without whitespace or a `data:` prefix. Each asset needs exactly one source (`path` or `data_base64`). Remote URLs and raw multipart `part` names are not accepted by this MCP.
+
+References can appear anywhere in string values in `state`, question `instructions`, and `criteria`, including nested JSON and the middle of a sentence. Images can also define Choice options, Score levels, and Noul true/false criteria. Object keys do not count as references. Prefer UUIDs to avoid accidental substring matches; every asset must be referenced. Shared images should be placed once in `state` and referred to by field name in questions.
+
+To have Jev inspect pixels, attach each relevant image in `assets`; a path or filename in `state` does not upload it. Keep the mapping exact, for example `state={"photo":"img_1"}` with `assets={"img_1":{"path":"/absolute/photo.png"}}`. A deliberately supplied textual summary supports evaluation of that summary, rather than the unseen pixels. After a validation error or HTTP 400, check required arguments and reference names before retrying.
+
+A box does not prove that an object exists. Ask about presence and use the location only when presence is adequately supported; presence and location may run in the same batch. Discard location when presence is absent or unresolved. Use neutral criteria, represent missing evidence with an unknown option or a sufficiency question, and choose a confidence threshold together with its verification or abstention fallback. Check that the final identifier matches the decision you actually support. The embedded guide and skill include complete image and ambiguous-evidence examples.
+
+The server automatically enables the required `TypeSafe-Danger-Zone-Images: true` header. Images and Box are experimental. PNG/JPEG images must be 280..1568 pixels per side and at most 16 MiB each. The API enforces dimensions, still-image decoding, and the 32 MiB limits on request body, processed images, and expanded request content. Each repeated reference expands the image again. References may use at most 1024 UTF-8 bytes each and 65536 bytes combined. Box requires Jev 1.14 or newer; its default is `jev-latest`, and an explicitly selected model is preserved.
+
+See the [official Images documentation](https://docs.typesafe.ai/images) and [Box contract](https://docs.typesafe.ai/primitives/box).
 
 ### Example: Agent Routing a Task Across Its Own Models via `jev_evaluate`
 

@@ -1,0 +1,1027 @@
+[
+  {
+    "id": "text_sentiment_mixed",
+    "category": "text",
+    "task": "Classify the customer's overall sentiment as positive, neutral, or negative. Return exactly one label.",
+    "state": "Message: 'The package arrived two days late. A shipping refund does not make up for the terrible delay, and I would not order again.'",
+    "assets": {},
+    "expected": {
+      "answer": "negative"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "direct_classification",
+      "jev_noul"
+    ],
+    "oracle": "The customer explicitly calls the delay terrible and says they would not order again.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Message: 'The package arrived two days late. A shipping refund does not make up for the terrible delay, and I would not order again.'",
+        "instructions": "Choose the overall sentiment label.",
+        "criteria": {
+          "positive": "Overall positive",
+          "neutral": "Overall neutral",
+          "negative": "Overall negative"
+        }
+      }
+    }
+  },
+  {
+    "id": "text_aspect_sentiment",
+    "category": "text",
+    "task": "Choose the sentiment toward the tea itself: positive, neutral, or negative.",
+    "state": "Review: 'The tea is fragrant and smooth, though the tin arrived dented.'",
+    "assets": {},
+    "expected": {
+      "answer": "positive"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "aspect_extraction",
+      "jev_choice"
+    ],
+    "oracle": "The praise concerns the tea's fragrance and texture; the dent is about packaging.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Review: 'The tea is fragrant and smooth, though the tin arrived dented.'",
+        "instructions": "Which sentiment applies to the tea itself?",
+        "criteria": {
+          "positive": "The tea is praised",
+          "neutral": "No sentiment about the tea",
+          "negative": "The tea is criticized"
+        }
+      }
+    }
+  },
+  {
+    "id": "text_rank_material",
+    "category": "text",
+    "task": "Select the best wood for the shelf. Return its candidate identifier.",
+    "state": "Candidates: A=oak, B=maple, C=birch. Need: a hard pale wood for a small indoor shelf; avoid red tones. Notes: oak is strong and pale; maple is very pale and hard; birch is pale but softer.",
+    "assets": {},
+    "expected": {
+      "answer": "B"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "constraint_ranking",
+      "jev_choice"
+    ],
+    "oracle": "Maple is described as very pale and hard, satisfying both explicit constraints.",
+    "canonical": {
+      "tool": "jev_evaluate",
+      "arguments": {
+        "state": "Candidates: A=oak, B=maple, C=birch. Need: a hard pale wood for a small indoor shelf; avoid red tones. Notes: oak is strong and pale; maple is very pale and hard; birch is pale but softer.",
+        "questions": {
+          "q1": {
+            "type": "choice",
+            "instructions": "Which candidate best meets the stated material constraints?",
+            "criteria": {
+              "A": "Oak is strong and pale",
+              "B": "Maple is very pale and hard",
+              "C": "Birch is pale but softer"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "text_policy_eligibility",
+    "category": "text",
+    "task": "Is the customer eligible for a refund under the policy? Answer true or false.",
+    "state": "Policy: A subscription may be canceled at any time. Refunds are available within 14 days only if usage is below 2 hours. Customer: canceled on day 10; used 3 hours.",
+    "assets": {},
+    "expected": {
+      "answer": false
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "rule_application",
+      "jev_noul"
+    ],
+    "oracle": "Cancellation is permitted, but the refund usage threshold is exceeded.",
+    "canonical": {
+      "tool": "jev_noul",
+      "arguments": {
+        "state": "Policy: A subscription may be canceled at any time. Refunds are available within 14 days only if usage is below 2 hours. Customer: canceled on day 10; used 3 hours.",
+        "instructions": "Is the customer eligible for a refund?",
+        "true_criteria": "Within 14 days and below 2 hours",
+        "false_criteria": "Fails at least one refund condition"
+      }
+    }
+  },
+  {
+    "id": "text_semantic_match",
+    "category": "text",
+    "task": "Choose the option that most directly preserves the reference meaning. Return its identifier.",
+    "state": "Options: A=The report was submitted on Monday. B=The report was submitted on Tuesday. C=The report had been drafted on Monday. D=The report was submitted on Wednesday. Reference meaning: submission occurred Monday.",
+    "assets": {},
+    "expected": {
+      "answer": "A"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "semantic_matching",
+      "jev_choice"
+    ],
+    "oracle": "A directly matches the submission date. B changes the date; C describes drafting, not submission; D changes the date.",
+    "canonical": {
+      "tool": "jev_evaluate",
+      "arguments": {
+        "state": "Options: A=The report was submitted on Monday. B=The report was submitted on Tuesday. C=The report had been drafted on Monday. D=The report was submitted on Wednesday. Reference meaning: submission occurred Monday.",
+        "questions": {
+          "q1": {
+            "type": "choice",
+            "instructions": "Which option most directly matches the reference meaning?",
+            "criteria": {
+              "A": "Submitted on Monday",
+              "B": "Submitted on Tuesday",
+              "C": "Drafted on Monday",
+              "D": "Submitted on Wednesday"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "text_study_design",
+    "category": "text",
+    "task": "Was this study randomized? Answer true or false.",
+    "state": "Abstract: We randomly assigned 80 volunteers to either a ten-minute breathing exercise or a quiet-reading activity. The breathing group reported lower stress immediately afterward, but the groups did not differ one week later.",
+    "assets": {},
+    "expected": {
+      "answer": true
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "direct_answer",
+      "jev_noul"
+    ],
+    "oracle": "The abstract explicitly says volunteers were randomly assigned.",
+    "canonical": {
+      "tool": "jev_noul",
+      "arguments": {
+        "state": "Abstract: We randomly assigned 80 volunteers to either a ten-minute breathing exercise or a quiet-reading activity. The breathing group reported lower stress immediately afterward, but the groups did not differ one week later.",
+        "instructions": "Does the abstract describe random assignment?",
+        "true_criteria": "Participants assigned randomly",
+        "false_criteria": "No random assignment described"
+      }
+    }
+  },
+  {
+    "id": "text_entailment",
+    "category": "text",
+    "task": "Does the information establish that the archive is closed today? Answer true or false.",
+    "state": "Facts: The museum is closed to visitors on Monday. The archive is inside the museum and is separately open to visitors on Monday. Today is Monday.",
+    "assets": {},
+    "expected": {
+      "answer": false
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "logical_entailment",
+      "jev_noul"
+    ],
+    "oracle": "The facts explicitly state the archive is open to visitors today.",
+    "canonical": {
+      "tool": "jev_noul",
+      "arguments": {
+        "state": "Facts: The museum is closed to visitors on Monday. The archive is inside the museum and is separately open to visitors on Monday. Today is Monday.",
+        "instructions": "Do the facts entail that the archive is closed today?",
+        "true_criteria": "The stated facts entail closure",
+        "false_criteria": "The stated facts do not entail closure"
+      }
+    }
+  },
+  {
+    "id": "text_rubric_priority",
+    "category": "text",
+    "task": "Obtain an independent external assessment of this ticket's urgency from 0 (lowest) to 4 (highest) using the rubric. Return the assessment's numeric score.",
+    "state": "Priority rubric: 0=cosmetic/lowest, 1=minor inconvenience, 2=moderate interruption, 3=major interruption, 4=safety-critical/highest. Ticket: 'The dashboard logo is 4 pixels too low; all controls work.'",
+    "assets": {},
+    "expected": {
+      "answer": 0
+    },
+    "grading": {
+      "kind": "numeric"
+    },
+    "jev": "required",
+    "acceptable_strategies": [
+      "rubric_scoring",
+      "jev_score"
+    ],
+    "oracle": "The issue is cosmetic and functionality remains intact, matching the rubric's lowest-priority class.",
+    "canonical": {
+      "tool": "jev_score",
+      "arguments": {
+        "state": "Priority rubric: 0=cosmetic/lowest, 1=minor inconvenience, 2=moderate interruption, 3=major interruption, 4=safety-critical/highest. Ticket: 'The dashboard logo is 4 pixels too low; all controls work.'",
+        "instructions": "How urgent is this ticket from 0 to 4?",
+        "criteria": [
+          "0 cosmetic/low",
+          "1 minor inconvenience",
+          "2 moderate interruption",
+          "3 major interruption",
+          "4 safety-critical"
+        ]
+      }
+    }
+  },
+  {
+    "id": "text_headline_ranking",
+    "category": "text",
+    "task": "Pick the headline that accurately summarizes the article. Return its identifier.",
+    "state": "Candidate headlines: A='City opens new riverside path'; B='City closes riverside path'; C='City debates a future riverside path'. The article says a new public path along the river has opened.",
+    "assets": {},
+    "expected": {
+      "answer": "A"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "semantic_ranking",
+      "jev_choice"
+    ],
+    "oracle": "A captures the opening of the new path. B says it closes, and C describes a debate rather than an opening.",
+    "canonical": {
+      "tool": "jev_evaluate",
+      "arguments": {
+        "state": "Candidate headlines: A='City opens new riverside path'; B='City closes riverside path'; C='City debates a future riverside path'. The article says a new public path along the river has opened.",
+        "questions": {
+          "q1": {
+            "type": "choice",
+            "instructions": "Which headline accurately summarizes the article?",
+            "criteria": {
+              "A": "A city opens a new riverside path",
+              "B": "A city closes the riverside path",
+              "C": "A city debates a future riverside path"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "text_theme_classification",
+    "category": "text",
+    "task": "Which response explicitly requests a product size option? Return its number.",
+    "state": "Responses: 1='Great flavor, but the box was crushed.' 2='Arrived promptly and tasted fine.' 3='I would buy it again; please add a larger size.'",
+    "assets": {},
+    "expected": {
+      "answer": "3"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "information_extraction",
+      "jev_choice"
+    ],
+    "oracle": "Only response 3 explicitly asks for a larger size.",
+    "canonical": {
+      "tool": "jev_evaluate",
+      "arguments": {
+        "state": "Responses: 1='Great flavor, but the box was crushed.' 2='Arrived promptly and tasted fine.' 3='I would buy it again; please add a larger size.'",
+        "questions": {
+          "q1": {
+            "type": "choice",
+            "instructions": "Which response requests a product size option?",
+            "criteria": {
+              "1": "Praises flavor and reports damage",
+              "2": "Mentions prompt arrival and acceptable taste",
+              "3": "Requests a larger size"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_count_green_circles",
+    "category": "image",
+    "task": "How many green circles are in the image? Return the matching count identifier as a string: '1', '2', '3', or '4'.",
+    "state": "Image reference: scene_01. Count only the green circles.",
+    "assets": {
+      "scene_01": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_01.png"
+      }
+    },
+    "expected": {
+      "answer": "3"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_counting",
+      "jev_choice"
+    ],
+    "oracle": "Three green circles are visible near the top; a red square is a distractor.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Image reference: scene_01. Count only the green circles.",
+        "instructions": "Select the answer supported by the visual evidence.",
+        "criteria": {
+          "1": "One green circle",
+          "2": "Two green circles",
+          "3": "Three green circles",
+          "4": "Four green circles"
+        },
+        "assets": {
+          "scene_01": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_01.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_color_shape_match",
+    "category": "image",
+    "task": "Which object is a circle? Return A, B, or C.",
+    "state": "Image reference: scene_02. Objects: A=yellow object, B=blue object, C=gray object.",
+    "assets": {
+      "scene_02": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_02.png"
+      }
+    },
+    "expected": {
+      "answer": "B"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_recognition",
+      "jev_choice"
+    ],
+    "oracle": "The blue circle is the only circular object.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Image reference: scene_02. Objects: A=yellow object, B=blue object, C=gray object.",
+        "instructions": "Which object is a circle?",
+        "criteria": {
+          "A": "Yellow object",
+          "B": "Blue object",
+          "C": "Gray object"
+        },
+        "assets": {
+          "scene_02": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_02.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_leftmost_color",
+    "category": "image",
+    "task": "What color is the leftmost object? Return the color name.",
+    "state": "Image reference: scene_03. Identify the leftmost object.",
+    "assets": {
+      "scene_03": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_03.png"
+      }
+    },
+    "expected": {
+      "answer": "yellow"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "spatial_relation",
+      "direct_visual_answer"
+    ],
+    "oracle": "The yellow circle centered at x=55 is left of every other shape.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Image reference: scene_03. Identify the leftmost object.",
+        "instructions": "Select the answer supported by the visual evidence.",
+        "criteria": {
+          "red": "Red circle",
+          "yellow": "Yellow circle",
+          "purple": "Purple rectangle",
+          "blue": "Blue rectangle"
+        },
+        "assets": {
+          "scene_03": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_03.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_compare_blue_count",
+    "category": "image",
+    "task": "Which image contains more blue objects? Return A or B.",
+    "state": "Images: scene_04a and scene_04b. Count all blue objects in each image.",
+    "assets": {
+      "scene_04a": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_04a.png"
+      },
+      "scene_04b": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_04b.png"
+      }
+    },
+    "expected": {
+      "answer": "B"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "cross_image_comparison",
+      "jev_choice"
+    ],
+    "oracle": "Image A has two blue circles. Image B has a blue circle, a blue rectangle, and another blue circle, so it has three blue objects.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Images: scene_04a and scene_04b. Count all blue objects in each image.",
+        "instructions": "Which image contains more blue objects?",
+        "criteria": {
+          "A": "First image",
+          "B": "Second image"
+        },
+        "assets": {
+          "scene_04a": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_04a.png"
+          },
+          "scene_04b": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_04b.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_compare_red_circle",
+    "category": "image",
+    "task": "Which image contains a red circle? Return A or B.",
+    "state": "Images: scene_05a and scene_05b. Determine which one contains a red circle.",
+    "assets": {
+      "scene_05a": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_05a.png"
+      },
+      "scene_05b": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_05b.png"
+      }
+    },
+    "expected": {
+      "answer": "A"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "cross_image_comparison",
+      "jev_choice"
+    ],
+    "oracle": "The first image has a red circle; the second has a blue circle.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Images: scene_05a and scene_05b. Determine which one contains a red circle.",
+        "instructions": "Select the answer supported by the visual evidence.",
+        "criteria": {
+          "A": "First image",
+          "B": "Second image"
+        },
+        "assets": {
+          "scene_05a": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_05a.png"
+          },
+          "scene_05b": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_05b.png"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "image_locate_red_square",
+    "category": "image",
+    "task": "Locate the red square and return its normalized bounding box.",
+    "state": "Image reference: scene_06. Locate the red square.",
+    "assets": {
+      "scene_06": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_06.png"
+      }
+    },
+    "expected": {
+      "answer": "red_square",
+      "box": {
+        "top": 0.2,
+        "bottom": 0.45,
+        "left": 0.15,
+        "right": 0.375
+      }
+    },
+    "grading": {
+      "kind": "box"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_localization",
+      "jev_box"
+    ],
+    "oracle": "The red square occupies x=60..149 and y=80..179 pixels. Coordinates are normalized by the 400-pixel image dimensions.",
+    "canonical": {
+      "tool": "jev_box",
+      "arguments": {
+        "state": "Image reference: scene_06. Locate the red square.",
+        "assets": {
+          "scene_06": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_06.png"
+          }
+        },
+        "instructions": "Return the normalized bounding box [top, bottom, left, right] for the red square in image scene_06."
+      }
+    }
+  },
+  {
+    "id": "image_locate_blue_circle",
+    "category": "image",
+    "task": "Locate the blue circle and return its normalized bounding box.",
+    "state": "Image reference: scene_07. Locate the blue circle.",
+    "assets": {
+      "scene_07": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_07.png"
+      }
+    },
+    "expected": {
+      "answer": "blue_circle",
+      "box": {
+        "top": 0.025,
+        "bottom": 0.225,
+        "left": 0.45,
+        "right": 0.65
+      }
+    },
+    "grading": {
+      "kind": "box"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_localization",
+      "jev_box"
+    ],
+    "oracle": "The blue circle's drawn extent is x=180..260 and y=10..90 pixels. Coordinates are normalized by the 400-pixel image dimensions.",
+    "canonical": {
+      "tool": "jev_box",
+      "arguments": {
+        "state": "Image reference: scene_07. Locate the blue circle.",
+        "assets": {
+          "scene_07": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_07.png"
+          }
+        },
+        "instructions": "Return the normalized bounding box [top, bottom, left, right] for the blue circle in image scene_07."
+      }
+    }
+  },
+  {
+    "id": "image_locate_yellow_rectangle",
+    "category": "image",
+    "task": "Locate the yellow rectangle and return its normalized bounding box.",
+    "state": "Image reference: scene_08. Locate the yellow rectangle.",
+    "assets": {
+      "scene_08": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_08.png"
+      }
+    },
+    "expected": {
+      "answer": "yellow_rectangle",
+      "box": {
+        "top": 0.55,
+        "bottom": 0.775,
+        "left": 0.625,
+        "right": 0.875
+      }
+    },
+    "grading": {
+      "kind": "box"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_localization",
+      "jev_box"
+    ],
+    "oracle": "The yellow rectangle occupies x=250..349 and y=220..309 pixels. Coordinates are normalized by the 400-pixel image dimensions.",
+    "canonical": {
+      "tool": "jev_box",
+      "arguments": {
+        "state": "Image reference: scene_08. Locate the yellow rectangle.",
+        "assets": {
+          "scene_08": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_08.png"
+          }
+        },
+        "instructions": "Return the normalized bounding box [top, bottom, left, right] for the yellow rectangle in image scene_08."
+      }
+    }
+  },
+  {
+    "id": "image_locate_green_circle",
+    "category": "image",
+    "task": "Locate the green circle and return its normalized bounding box.",
+    "state": "Image reference: scene_09. Locate the green circle.",
+    "assets": {
+      "scene_09": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_09.png"
+      }
+    },
+    "expected": {
+      "answer": "green_circle",
+      "box": {
+        "top": 0.4625,
+        "bottom": 0.6375,
+        "left": 0.1375,
+        "right": 0.3125
+      }
+    },
+    "grading": {
+      "kind": "box"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_localization",
+      "jev_box"
+    ],
+    "oracle": "The green circle's drawn extent is x=55..125 and y=185..255 pixels. Coordinates are normalized by the 400-pixel image dimensions.",
+    "canonical": {
+      "tool": "jev_box",
+      "arguments": {
+        "state": "Image reference: scene_09. Locate the green circle.",
+        "assets": {
+          "scene_09": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_09.png"
+          }
+        },
+        "instructions": "Return the normalized bounding box [top, bottom, left, right] for the green circle in image scene_09."
+      }
+    }
+  },
+  {
+    "id": "image_locate_purple_square",
+    "category": "image",
+    "task": "Locate the purple square and return its normalized bounding box.",
+    "state": "Image reference: scene_10. Locate the purple square.",
+    "assets": {
+      "scene_10": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_10.png"
+      }
+    },
+    "expected": {
+      "answer": "purple_square",
+      "box": {
+        "top": 0.475,
+        "bottom": 0.725,
+        "left": 0.5125,
+        "right": 0.7625
+      }
+    },
+    "grading": {
+      "kind": "box"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "visual_localization",
+      "jev_box"
+    ],
+    "oracle": "The purple square occupies x=205..304 and y=190..289 pixels. Coordinates are normalized by the 400-pixel image dimensions.",
+    "canonical": {
+      "tool": "jev_box",
+      "arguments": {
+        "state": "Image reference: scene_10. Locate the purple square.",
+        "assets": {
+          "scene_10": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_10.png"
+          }
+        },
+        "instructions": "Return the normalized bounding box [top, bottom, left, right] for the purple square in image scene_10."
+      }
+    }
+  },
+  {
+    "id": "ambiguous_conflicting_reviewers",
+    "category": "ambiguous",
+    "task": "Can you determine whether the claim is supported from the provided evidence? If the evidence conflicts or is missing, answer unknown and abstain.",
+    "state": "Two independent reviewers assess whether a claim is supported by a cited paragraph. Reviewer A says the claim is directly supported and assigns probability 0.9. Reviewer B says the paragraph contradicts the claim and assigns probability 0.1. The paragraph itself is unavailable.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "abstain": true
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "conflict_detection",
+      "evidence_check",
+      "abstention"
+    ],
+    "oracle": "The reviewers directly conflict and the cited paragraph is unavailable, so the claim cannot be resolved.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Two independent reviewers assess whether a claim is supported by a cited paragraph. Reviewer A says the claim is directly supported and assigns probability 0.9. Reviewer B says the paragraph contradicts the claim and assigns probability 0.1. The paragraph itself is unavailable.",
+        "instructions": "Can the claim's support be determined from the conflicting reports?",
+        "criteria": {
+          "supported": "The evidence supports the claim",
+          "unsupported": "The evidence contradicts the claim",
+          "unknown": "The evidence is insufficient or conflicting"
+        }
+      }
+    }
+  },
+  {
+    "id": "ambiguous_similar_options",
+    "category": "ambiguous",
+    "task": "Which item does the request identify? Return A, B, or neither.",
+    "state": "Candidates: A=the blue ceramic mug; B=the blue glass cup. Request: 'Please pack the blue one carefully.' No material or shape preference is stated.",
+    "assets": {},
+    "expected": {
+      "answer": "neither"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "ambiguity_detection",
+      "jev_choice"
+    ],
+    "oracle": "Both candidates are blue and the request adds no distinguishing attribute.",
+    "canonical": {
+      "tool": "jev_evaluate",
+      "arguments": {
+        "state": "Candidates: A=the blue ceramic mug; B=the blue glass cup. Request: 'Please pack the blue one carefully.' No material or shape preference is stated.",
+        "questions": {
+          "q1": {
+            "type": "choice",
+            "instructions": "Which candidate is uniquely identified by the request?",
+            "criteria": {
+              "A": "Blue ceramic mug",
+              "B": "Blue glass cup",
+              "neither": "The request does not distinguish them"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "ambiguous_conflicting_receipts",
+    "category": "ambiguous",
+    "task": "What purchase date should be recorded? If the records conflict and neither is authoritative, answer unknown and abstain.",
+    "state": "Receipt record A lists purchase date 2026-02-03. Receipt record B lists purchase date 2026-02-04. Neither record is marked as corrected or authoritative.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "abstain": true
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "conflict_detection",
+      "abstention"
+    ],
+    "oracle": "The two records list different dates and neither is authoritative.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Receipt record A lists purchase date 2026-02-03. Receipt record B lists purchase date 2026-02-04. Neither record is marked as corrected or authoritative.",
+        "instructions": "Which purchase date is established by the records?",
+        "criteria": {
+          "2026-02-03": "Record A date",
+          "2026-02-04": "Record B date",
+          "unknown": "The conflicting records do not establish one date"
+        }
+      }
+    }
+  },
+  {
+    "id": "ambiguous_conflicting_notes",
+    "category": "ambiguous",
+    "task": "Which city should be recorded as the capital? If the supplied notes conflict without a reliable source, answer unknown and abstain.",
+    "state": "Conflicting notes: Note A says the capital is Paris. Note B says the capital is Lyon. Neither note has a source or verification status.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "abstain": true
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "conflict_detection",
+      "abstention"
+    ],
+    "oracle": "The two notes conflict and neither has a reliable source, so the provided evidence does not establish an answer.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Conflicting notes: Note A says the capital is Paris. Note B says the capital is Lyon. Neither note has a source or verification status.",
+        "instructions": "Which city is established by the supplied notes?",
+        "criteria": {
+          "Paris": "Note A",
+          "Lyon": "Note B",
+          "unknown": "The notes conflict and neither is verified"
+        }
+      }
+    }
+  },
+  {
+    "id": "ambiguous_absent_object",
+    "category": "ambiguous",
+    "task": "Is a pink star present? Answer present or absent. If absent, return no box and abstain; if present, return its normalized bounding box.",
+    "state": "Image reference: scene_11. Inspect the image for a pink star.",
+    "assets": {
+      "scene_11": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_11.png"
+      }
+    },
+    "expected": {
+      "answer": "absent",
+      "abstain": true
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "object_presence_check",
+      "jev_choice",
+      "optional_localization",
+      "abstention"
+    ],
+    "oracle": "The image contains a blue circle, a red rectangle, and a green circle; no pink star is present.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Image reference: scene_11. Inspect the image for a pink star.",
+        "assets": {
+          "scene_11": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\baseline-full\\assets\\scene_11.png"
+          }
+        },
+        "instructions": "Is a pink star present?",
+        "criteria": {
+          "present": "A pink star is visible",
+          "absent": "No pink star is visible"
+        }
+      }
+    }
+  },
+  {
+    "id": "deterministic_sort",
+    "category": "deterministic",
+    "task": "Return the input numbers sorted in ascending order as a JSON array.",
+    "state": "Input: [4, 1, 4, 2].",
+    "assets": {},
+    "expected": {
+      "answer": [
+        1,
+        2,
+        4,
+        4
+      ]
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "unnecessary",
+    "acceptable_strategies": [
+      "direct_computation",
+      "code_execution"
+    ],
+    "oracle": "Sorting the four supplied integers gives 1, 2, 4, 4.",
+    "canonical": null
+  },
+  {
+    "id": "deterministic_character_count",
+    "category": "deterministic",
+    "task": "Count the non-space characters in the input string. Return an integer.",
+    "state": "Input string: 'TypeSafe Jev'",
+    "assets": {},
+    "expected": {
+      "answer": 11
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "unnecessary",
+    "acceptable_strategies": [
+      "direct_computation",
+      "code_execution"
+    ],
+    "oracle": "The string contains 8 letters in TypeSafe and 3 in Jev: 11 non-space characters.",
+    "canonical": null
+  },
+  {
+    "id": "deterministic_median",
+    "category": "deterministic",
+    "task": "Return the median of the four values as a number.",
+    "state": "Values: 12, 15, 21, 28.",
+    "assets": {},
+    "expected": {
+      "answer": 18
+    },
+    "grading": {
+      "kind": "numeric"
+    },
+    "jev": "unnecessary",
+    "acceptable_strategies": [
+      "direct_computation",
+      "code_execution"
+    ],
+    "oracle": "For four sorted values, the median is the mean of the middle pair: (15+21)/2=18.",
+    "canonical": null,
+    "tolerance": 0.0
+  },
+  {
+    "id": "deterministic_code_trace",
+    "category": "deterministic",
+    "task": "What value does the call return? Give a JSON array.",
+    "state": "Code: def f(items):\n    return [x * 2 for x in items if x > 0]\nCall: f([-2, 0, 3, 5])",
+    "assets": {},
+    "expected": {
+      "answer": [
+        6,
+        10
+      ]
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "unnecessary",
+    "acceptable_strategies": [
+      "code_tracing",
+      "direct_computation"
+    ],
+    "oracle": "The function keeps positive values 3 and 5 and doubles them.",
+    "canonical": null
+  },
+  {
+    "id": "deterministic_binary_conversion",
+    "category": "deterministic",
+    "task": "Convert the binary input to a base-10 integer. Return only the integer.",
+    "state": "Input: 0b101101",
+    "assets": {},
+    "expected": {
+      "answer": 45
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "unnecessary",
+    "acceptable_strategies": [
+      "base_conversion",
+      "direct_computation"
+    ],
+    "oracle": "Binary 101101 is 32+8+4+1, which equals 45.",
+    "canonical": null
+  }
+]

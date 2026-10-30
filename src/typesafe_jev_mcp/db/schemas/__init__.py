@@ -7,7 +7,6 @@ from typesafe_jev_mcp.db.schemas.primitives import (
     BoxQuestion,
     ChoiceAnswer,
     ChoiceQuestion,
-    EvaluationRequest,
     EvaluationResponse,
     NoulAnswer,
     NoulCriteria,
@@ -18,6 +17,8 @@ from typesafe_jev_mcp.db.schemas.primitives import (
     derive_noul_confidence,
     validate_json_state,
 )
+
+from typesafe_jev_mcp.db.schemas.requests import EvaluationRequest
 
 __all__ = [
     "AnswerItem",

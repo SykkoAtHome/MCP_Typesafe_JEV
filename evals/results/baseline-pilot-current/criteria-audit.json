@@ -1,0 +1,403 @@
+{
+  "scope": "Independent manual audit of all actual Jev evaluation calls in this pilot; excludes canonical fixed-question calls, resource reads, compute calls and application source.",
+  "method": "All 31 argument payloads were inspected against task/state from the manifest and captured tool descriptions. Published JSON schemas were validated locally with jsonschema. Semantic nested-question constraints and image-reference contracts were additionally inspected manually. No network or Jev audit calls were made.",
+  "definitions": {
+    "call_index": "Zero-based index into the original trial tool_calls array.",
+    "arguments_valid": "Published JSON schema passes and the documented asset-reference contract is met; binary missing-unknown problems are recorded as criteria_quality issues rather than structural invalidity.",
+    "criteria_quality": "pass means a relevant, sufficiently atomic and balanced formulation for this declared task; issue means an identified semantic or asset-targeting defect; uncertain would mean evidence was insufficient. HTTP success alone is not semantic validation."
+  },
+  "summary": {
+    "evaluation_calls": 31,
+    "json_schema_valid": 31,
+    "arguments_valid_including_documented_asset_reference_contract": 29,
+    "criteria_quality": {
+      "pass": 25,
+      "issue": 6
+    },
+    "by_arm": {
+      "descriptions": {
+        "calls": 10,
+        "arguments_invalid": 0,
+        "criteria_issues": 2
+      },
+      "guide": {
+        "calls": 11,
+        "arguments_invalid": 2,
+        "criteria_issues": 4
+      },
+      "skill": {
+        "calls": 10,
+        "arguments_invalid": 0,
+        "criteria_issues": 0
+      },
+      "no_jev": {
+        "calls": 0,
+        "arguments_invalid": 0,
+        "criteria_issues": 0
+      }
+    }
+  },
+  "instruction_improvement_suggestions": [
+    {
+      "suggestion": "For image calls, require every assets key to appear verbatim in state/instructions/criteria. On a 400 Invalid image request, check the key-reference match before retrying; changing path separators does not repair a mismatched reference.",
+      "evidence": [
+        "image_locate_blue_circle / guide / repeat 0 / call_index 0",
+        "image_locate_blue_circle / guide / repeat 0 / call_index 1"
+      ]
+    },
+    {
+      "suggestion": "When the task admits unknown or evidence is missing/conflicting, use choice with explicit supported/unsupported/unknown, or ask independent noul questions about observable conflict and source availability. Do not request a third outcome from a binary primitive, equate lack of evidence with contradiction, or equate source availability with support.",
+      "evidence": [
+        "ambiguous_conflicting_reviewers / descriptions / repeats 0 and 1",
+        "ambiguous_conflicting_reviewers / guide / repeats 0 and 1"
+      ],
+      "observed_good_examples": [
+        "ambiguous_conflicting_reviewers / skill / repeat 0: explicit unknown choice",
+        "ambiguous_conflicting_reviewers / skill / repeat 1: separate conflict and source-availability questions"
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "case_id": "text_sentiment_mixed",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The original complaint or a faithful paraphrase is retained; one overall-sentiment question has the requested positive/neutral/negative labels with parallel, relevant definitions and no asserted winner.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "A single visible target, the blue circle, is specified; the supplied image asset key is referenced in state or instructions. Bounding-box output uses the tool-defined normalized coordinate contract.",
+      "tool": "jev_box",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_sentiment_mixed",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The original complaint or a faithful paraphrase is retained; one overall-sentiment question has the requested positive/neutral/negative labels with parallel, relevant definitions and no asserted winner.",
+      "tool": "jev_choice",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete ticket is retained. A single urgency dimension uses all five supplied rubric levels in their original lowest-to-highest order; no target score is inserted.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_sentiment_mixed",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The original complaint or a faithful paraphrase is retained; one overall-sentiment question has the requested positive/neutral/negative labels with parallel, relevant definitions and no asserted winner.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_sentiment_mixed",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The original complaint or a faithful paraphrase is retained; one overall-sentiment question has the requested positive/neutral/negative labels with parallel, relevant definitions and no asserted winner.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_count_green_circles",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The synthetic image is supplied under a reference present in state; the question targets only green circles. The four count options are mutually exclusive and exactly match the user-declared answer domain; no count is asserted in advance.",
+      "tool": "jev_choice",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": false,
+      "criteria_quality": "issue",
+      "rationale": "The target itself is clear, and the JSON tool schema passes, but assets uses key photo while state refers only to scene_07 and instructions reference no photo key. This violates the documented image-reference contract. The actual response is HTTP 400 Invalid image request; the second call repeats the same mismatch while changing only path separators. The trace is consistent with the mismatch causing rejection, without proving upstream internals.",
+      "tool": "jev_box",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 1,
+      "arguments_valid": false,
+      "criteria_quality": "issue",
+      "rationale": "The target itself is clear, and the JSON tool schema passes, but assets uses key photo while state refers only to scene_07 and instructions reference no photo key. This violates the documented image-reference contract. The actual response is HTTP 400 Invalid image request; the second call repeats the same mismatch while changing only path separators. The trace is consistent with the mismatch causing rejection, without proving upstream internals.",
+      "tool": "jev_box",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "A single visible target, the blue circle, is specified; the supplied image asset key is referenced in state or instructions. Bounding-box output uses the tool-defined normalized coordinate contract.",
+      "tool": "jev_box",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "A single visible target, the blue circle, is specified; the supplied image asset key is referenced in state or instructions. Bounding-box output uses the tool-defined normalized coordinate contract.",
+      "tool": "jev_box",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_count_green_circles",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The synthetic image is supplied under a reference present in state; the question targets only green circles. The four count options are mutually exclusive and exactly match the user-declared answer domain; no count is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete ticket is retained. A single urgency dimension uses all five supplied rubric levels in their original lowest-to-highest order; no target score is inserted.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete ticket is retained. A single urgency dimension uses all five supplied rubric levels in their original lowest-to-highest order; no target score is inserted.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_count_green_circles",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The synthetic image is supplied under a reference present in state; the question targets only green circles. The four count options are mutually exclusive and exactly match the user-declared answer domain; no count is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_sentiment_mixed",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The original complaint or a faithful paraphrase is retained; one overall-sentiment question has the requested positive/neutral/negative labels with parallel, relevant definitions and no asserted winner.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_sentiment_mixed",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The original complaint or a faithful paraphrase is retained; one overall-sentiment question has the requested positive/neutral/negative labels with parallel, relevant definitions and no asserted winner.",
+      "tool": "jev_choice",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "issue",
+      "rationale": "The evidence is relevant, but the binary question asks about the unavailable paragraph itself, with only supports versus does-not-support/contradicts criteria. Missing or conflicting evidence is not equivalent to contradiction and has no represented answer. A probability near 0.5 is possible but does not explicitly encode the required unknown class.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_count_green_circles",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The synthetic image is supplied under a reference present in state; the question targets only green circles. The four count options are mutually exclusive and exactly match the user-declared answer domain; no count is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "A single visible target, the blue circle, is specified; the supplied image asset key is referenced in state or instructions. Bounding-box output uses the tool-defined normalized coordinate contract.",
+      "tool": "jev_box",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_count_green_circles",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The synthetic image is supplied under a reference present in state; the question targets only green circles. The four count options are mutually exclusive and exactly match the user-declared answer domain; no count is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "issue",
+      "rationale": "The evidence is relevant, but supported uses binary criteria requiring evidence of support versus evidence of non-support; neither covers the actual unresolved state. A separate unavailable question permits safe abstention downstream, but combines source unavailability and conflict-driven irresolvability in one compound predicate. Prefer an explicit unknown choice or independent conflict/source-availability questions.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "issue",
+      "rationale": "The evidence is relevant, but instructions explicitly demand unknown/not-established while the noul primitive can return only a probability and binary verdict. Criteria require established support or established non-support and omit unresolved evidence; the requested conclusion is outside the answer domain.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete ticket is retained. A single urgency dimension uses all five supplied rubric levels in their original lowest-to-highest order; no target score is inserted.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "Two independent atomic binary questions assess observable reviewer disagreement and source availability, rather than guessing the unavailable paragraph. Both relevant facts are retained and their true/false criteria match their respective predicates.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The conflicting reports and missing paragraph are retained. The single evidentiary-support classification includes supported/unsupported/unknown, with an explicit insufficient-evidence option matching the user condition; no unavailable paragraph content is fabricated.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete ticket is retained. A single urgency dimension uses all five supplied rubric levels in their original lowest-to-highest order; no target score is inserted.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "issue",
+      "rationale": "The evidence is relevant, but instructions demand an undetermined conclusion outside the binary noul answer domain. They also say true if paragraph content is available OR evidence establishes support, which incorrectly treats mere source availability as support and conflicts with the narrower true criterion. Neither binary criterion covers unresolved evidence.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "A single visible target, the blue circle, is specified; the supplied image asset key is referenced in state or instructions. Bounding-box output uses the tool-defined normalized coordinate contract.",
+      "tool": "jev_box",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete ticket is retained. A single urgency dimension uses all five supplied rubric levels in their original lowest-to-highest order; no target score is inserted.",
+      "tool": "jev_score",
+      "json_schema_valid": true
+    },
+    {
+      "case_id": "image_count_green_circles",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The synthetic image is supplied under a reference present in state; the question targets only green circles. The four count options are mutually exclusive and exactly match the user-declared answer domain; no count is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true
+    }
+  ]
+}

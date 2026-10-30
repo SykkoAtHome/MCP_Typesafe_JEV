@@ -1,0 +1,88 @@
+[
+  {
+    "category": "replay",
+    "state": "Two files have equally plausible roles; contents are unavailable.",
+    "task": "Obtain an independent external assessment of which file is responsible: A or B. If the external assessment cannot reliably distinguish them, return unknown and abstain. Do not inspect files.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "accepted_answers": [
+        "unknown",
+        null
+      ],
+      "abstain": true
+    },
+    "grading": "exact",
+    "jev": "required",
+    "canonical": null,
+    "acceptable_strategies": [
+      "external assessment then abstain on inconclusive evidence"
+    ],
+    "oracle": "Both candidates are indistinguishable from provided information; external reply is controlled.",
+    "id": "replay_low_confidence",
+    "replay": {
+      "choice": "A",
+      "probabilities": {
+        "A": 0.51,
+        "B": 0.49
+      },
+      "confidence": 0.02
+    }
+  },
+  {
+    "category": "replay",
+    "state": "Two files have equally plausible roles; contents are unavailable.",
+    "task": "Obtain an independent external assessment of which file is responsible: A or B. If the external assessment cannot reliably distinguish them, return unknown and abstain. Do not inspect files.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "accepted_answers": [
+        "unknown",
+        null
+      ],
+      "abstain": true
+    },
+    "grading": "exact",
+    "jev": "required",
+    "canonical": null,
+    "acceptable_strategies": [
+      "external assessment then abstain on inconclusive evidence"
+    ],
+    "oracle": "Both candidates are indistinguishable from provided information; external reply is controlled.",
+    "id": "replay_upstream_error",
+    "replay": {
+      "error": "upstream_error",
+      "message": "Synthetic temporary HTTP 529; external assessment unavailable"
+    }
+  },
+  {
+    "category": "replay",
+    "state": "Two files have equally plausible roles; contents are unavailable.",
+    "task": "Obtain an independent external assessment of which file is responsible: A or B. If the external assessment cannot reliably distinguish them, return unknown and abstain. Do not inspect files.",
+    "assets": {},
+    "expected": {
+      "answer": "unknown",
+      "accepted_answers": [
+        "unknown",
+        null
+      ],
+      "abstain": true
+    },
+    "grading": "exact",
+    "jev": "required",
+    "canonical": null,
+    "acceptable_strategies": [
+      "external assessment then abstain on inconclusive evidence"
+    ],
+    "oracle": "Both candidates are indistinguishable from provided information; external reply is controlled.",
+    "id": "replay_contradictory_high_confidence",
+    "replay": {
+      "choice": "A",
+      "probabilities": {
+        "A": 1.0,
+        "B": 0.0
+      },
+      "confidence": 1.0
+    }
+  }
+]
