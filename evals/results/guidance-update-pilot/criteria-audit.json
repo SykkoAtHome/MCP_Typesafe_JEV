@@ -1,0 +1,668 @@
+{
+  "scope": "Independent audit of every actual Jev evaluation call in guidance-update-pilot. No code edits, network or Jev audit calls.",
+  "method": "All payloads, responses and final decisions manually inspected. Captured JSON schemas validated locally; asset reference string availability, local path membership/existence and all comparison inputs checked. Image content hashes and task/answer keys compared against the frozen baseline.",
+  "definitions": {
+    "call_index": "Zero-based index in original trial tool_calls.",
+    "arguments_valid": "Captured JSON schema, image-reference contract and evidence availability are satisfied; actual assets or an explicit sufficient faithful summary may provide evidence.",
+    "criteria_quality": "pass: task-relevant and balanced formulation; speculative presence+box is valid when absent/unresolved boxes are discarded, without requiring a null-absence output. Caller summaries do not count as independent Jev vision.",
+    "final_choice_consumption": "Assessed independently from question quality. A final wrong identifier remains a task error even if the explanation names the correct answer."
+  },
+  "summary": {
+    "calls": 36,
+    "json_schema_valid": 36,
+    "arguments_valid": 36,
+    "criteria_quality": {
+      "pass": 36
+    },
+    "evidence_modes": {
+      "not_applicable": 12,
+      "supplied_image": 21,
+      "agent_visual_summary": 3
+    },
+    "by_arm": {
+      "descriptions": {
+        "calls": 12,
+        "arguments_invalid": 0
+      },
+      "guide": {
+        "calls": 12,
+        "arguments_invalid": 0
+      },
+      "skill": {
+        "calls": 12,
+        "arguments_invalid": 0
+      },
+      "no_jev": {
+        "calls": 0,
+        "arguments_invalid": 0
+      }
+    },
+    "trials": 48,
+    "successful_calls": 36,
+    "failed_calls": 0,
+    "final_choice_consumption_errors": 2,
+    "task_outcomes": {
+      "descriptions": {
+        "correct": 12,
+        "trials": 12
+      },
+      "guide": {
+        "correct": 11,
+        "trials": 12
+      },
+      "skill": {
+        "correct": 11,
+        "trials": 12
+      },
+      "no_jev": {
+        "correct": 10,
+        "trials": 12
+      }
+    },
+    "task_failures": [
+      {
+        "case_id": "image_compare_blue_count",
+        "arm": "no_jev",
+        "repeat": 1,
+        "answer": "A",
+        "reason": "Image A has two blue objects; image B has one blue circle and one blue square, so it has two. Neither contains more.",
+        "attribution": "The agent answers without Jev. Its own miscount or mismatch between the correct reason and answer=A is an agent error, not a Jev failure."
+      },
+      {
+        "case_id": "image_compare_blue_count",
+        "arm": "skill",
+        "repeat": 0,
+        "answer": "A",
+        "reason": "Image A has two blue objects; image B has three blue objects. Although the evaluation selected B, visual inspection supports B.",
+        "attribution": "Jev selects B at high confidence from a valid request. The final answer field is A while the reason identifies two blue objects in A and three in B. This is an agent final-field/decision-consumption error, not a bad request or wrong Jev response. A correct reason does not repair a wrong structured answer."
+      },
+      {
+        "case_id": "image_compare_blue_count",
+        "arm": "guide",
+        "repeat": 0,
+        "answer": "A",
+        "reason": "Image A has two blue objects (the blue circles); image B also has two blue circles plus a blue square, so B has more.",
+        "attribution": "Jev selects B at high confidence from a valid request. The final answer field is A while the reason identifies two blue objects in A and three in B. This is an agent final-field/decision-consumption error, not a bad request or wrong Jev response. A correct reason does not repair a wrong structured answer."
+      },
+      {
+        "case_id": "image_compare_blue_count",
+        "arm": "no_jev",
+        "repeat": 0,
+        "answer": "A",
+        "reason": "Image A has two blue objects; image B also has two blue objects (a blue circle and a blue square). They are tied, so neither contains more.",
+        "attribution": "The agent answers without Jev. Its own miscount or mismatch between the correct reason and answer=A is an agent error, not a Jev failure."
+      }
+    ]
+  },
+  "baseline_six_case_subset": {
+    "case_ids": [
+      "ambiguous_absent_object",
+      "ambiguous_conflicting_reviewers",
+      "image_color_shape_match",
+      "image_compare_blue_count",
+      "image_locate_blue_circle",
+      "text_rubric_priority"
+    ],
+    "summary": {
+      "calls": 37,
+      "json_schema_valid": 36,
+      "arguments_valid": 29,
+      "criteria_quality": {
+        "issue": 8,
+        "pass": 27,
+        "uncertain": 2
+      },
+      "evidence_modes": {
+        "agent_visual_summary": 4,
+        "missing_visual_evidence": 5,
+        "supplied_image": 16,
+        "not_applicable": 12
+      },
+      "by_arm": {
+        "descriptions": {
+          "calls": 13,
+          "arguments_invalid": 4
+        },
+        "guide": {
+          "calls": 12,
+          "arguments_invalid": 4
+        },
+        "skill": {
+          "calls": 12,
+          "arguments_invalid": 0
+        },
+        "no_jev": {
+          "calls": 0,
+          "arguments_invalid": 0
+        }
+      },
+      "failed_calls": 3,
+      "format_corrected_task_outcomes": {
+        "descriptions": "12/12",
+        "guide": "10/12",
+        "skill": "12/12",
+        "no_jev": "12/12"
+      }
+    },
+    "comparability_note": "The main pilot repeats these six tasks twice per arm. The final wording check includes only the blue-count comparison; its overall percentage is not comparable to the full six-case percentage. Historical uncertain box-on-absence ratings are not counted as invalid baseline arguments."
+  },
+  "integrity": {
+    "same_task_state_grading_and_expected_answer_as_frozen_baseline": true,
+    "same_image_content_hashes_as_frozen_baseline": true,
+    "format_alias_metadata_differences": [
+      {
+        "case_id": "ambiguous_conflicting_reviewers",
+        "difference": "Previously documented null_abstention format alias is present in the new manifest; the expected unknown answer and abstention condition are unchanged."
+      }
+    ],
+    "blue_comparison_expected_answer": "B",
+    "answer_key_changed_to_hide_errors": false
+  },
+  "interpretation": "Observed argument construction improves: no missing instructions, mismatched/unreferenced image assets, or questions lacking both image pixels and sufficient summaries. This sample does not demonstrate an end-task accuracy gain. Correct high-confidence Jev selections are still sometimes replaced by an inconsistent agent final identifier; direct-agent visual errors persist as well. Do not retune the expected B answer or comparison criterion to conceal the failures.",
+  "calls": [
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete cosmetic ticket is retained. A single urgency dimension uses the five user-supplied levels in lowest-to-highest order; criteria do not assert a desired score. Final rounding to zero is within the predeclared tolerance.",
+      "tool": "jev_score",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_absent_object",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct referenced image is supplied. A balanced present/absent choice, optionally with unknown, asks specifically about a pink star. A speculative box is also requested, but its non-null low-confidence region is discarded when presence is absent. The workflow does not rely on a null-absence sentinel.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "Presence is correctly absent, while box returns a low-confidence region for a nonexistent target. The agent correctly discards that region, answers absent and abstains with box=null. No absence sentinel guarantee is inferred.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_absent_object",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct referenced image is supplied. A balanced present/absent choice, optionally with unknown, asks specifically about a pink star. A speculative box is also requested, but its non-null low-confidence region is discarded when presence is absent. The workflow does not rely on a null-absence sentinel.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "Presence is correctly absent, while box returns a low-confidence region for a nonexistent target. The agent correctly discards that region, answers absent and abstains with box=null. No absence sentinel guarantee is inferred.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct synthetic image is supplied under a referenced key and the blue-circle target is unambiguous. Independent presence and box questions share one batch; positive presence supports consuming the box.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete cosmetic ticket is retained. A single urgency dimension uses the five user-supplied levels in lowest-to-highest order; criteria do not assert a desired score. Final rounding to zero is within the predeclared tolerance.",
+      "tool": "jev_score",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_color_shape_match",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One circle-identification question uses aligned A/B/C color labels and balanced candidate descriptions. The caller explicitly supplies a faithful shape inventory, including the blue circle. This is a valid text check of the agent observation, not independent Jev vision.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "agent_visual_summary",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete cosmetic ticket is retained. A single urgency dimension uses the five user-supplied levels in lowest-to-highest order; criteria do not assert a desired score. Final rounding to zero is within the predeclared tolerance.",
+      "tool": "jev_score",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete cosmetic ticket is retained. A single urgency dimension uses the five user-supplied levels in lowest-to-highest order; criteria do not assert a desired score. Final rounding to zero is within the predeclared tolerance.",
+      "tool": "jev_score",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct synthetic image is supplied under a referenced key and the blue-circle target is unambiguous. Independent presence and box questions share one batch; positive presence supports consuming the box.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_compare_blue_count",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One blue-object comparison uses aligned A/B mappings and balanced more-A/more-B/tie options, optionally with unknown. Both required image assets are supplied, their keys occur in string values, and no winner is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct synthetic image is supplied under a referenced key and the blue-circle target is unambiguous. The localization tool returns a box for the visible target; the workflow does not use a box alone as an absence/presence decision.",
+      "tool": "jev_box",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct synthetic image is supplied under a referenced key and the blue-circle target is unambiguous. Independent presence and box questions share one batch; positive presence supports consuming the box.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_compare_blue_count",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One blue-object comparison uses aligned A/B mappings and balanced more-A/more-B/tie options, optionally with unknown. Both required image assets are supplied, their keys occur in string values, and no winner is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_color_shape_match",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One circle-identification question uses aligned A/B/C color labels and balanced candidate descriptions. The actual synthetic image is supplied under a referenced key; an optional unknown class represents unclear evidence.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_color_shape_match",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One circle-identification question uses aligned A/B/C color labels and balanced candidate descriptions. The actual synthetic image is supplied under a referenced key; an optional unknown class represents unclear evidence.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_absent_object",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct referenced image is supplied. A balanced present/absent choice, optionally with unknown, asks specifically about a pink star. Only presence is queried; the final response correctly abstains and emits no box.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_compare_blue_count",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One blue-object comparison uses aligned A/B mappings and balanced more-A/more-B/tie options, optionally with unknown. Both required image assets are supplied, their keys occur in string values, and no winner is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "Jev selects B at high confidence from a valid request. The final answer field is A while the reason identifies two blue objects in A and three in B. This is an agent final-field/decision-consumption error, not a bad request or wrong Jev response. A correct reason does not repair a wrong structured answer.",
+      "final_choice_consumption": "inconsistent_final_identifier"
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete cosmetic ticket is retained. A single urgency dimension uses the five user-supplied levels in lowest-to-highest order; criteria do not assert a desired score. Final rounding to zero is within the predeclared tolerance.",
+      "tool": "jev_score",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "text_rubric_priority",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The complete cosmetic ticket is retained. A single urgency dimension uses the five user-supplied levels in lowest-to-highest order; criteria do not assert a desired score. Final rounding to zero is within the predeclared tolerance.",
+      "tool": "jev_score",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "Conflicting reviewer reports and missing source text are retained. One support-status question includes an explicit unknown option, with supported/non-supported or contradicted alternatives. Jev selects unknown and the final response abstains.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_absent_object",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct referenced image is supplied. A balanced present/absent choice, optionally with unknown, asks specifically about a pink star. A speculative box is also requested, but its non-null low-confidence region is discarded when presence is absent. The workflow does not rely on a null-absence sentinel.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "Presence is correctly absent, while box returns a low-confidence region for a nonexistent target. The agent correctly discards that region, answers absent and abstains with box=null. No absence sentinel guarantee is inferred.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_compare_blue_count",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One blue-object comparison uses aligned A/B mappings and balanced more-A/more-B/tie options, optionally with unknown. The caller explicitly provides a complete and accurate object inventory for each image. This is a valid comparison of the supplied summary, not independent image counting by Jev.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "agent_visual_summary",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_absent_object",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct referenced image is supplied. A balanced present/absent choice, optionally with unknown, asks specifically about a pink star. A speculative box is also requested, but its non-null low-confidence region is discarded when presence is absent. The workflow does not rely on a null-absence sentinel.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "Presence is correctly absent, while box returns a low-confidence region for a nonexistent target. The agent correctly discards that region, answers absent and abstains with box=null. No absence sentinel guarantee is inferred.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct synthetic image is supplied under a referenced key and the blue-circle target is unambiguous. Independent presence and box questions share one batch; positive presence supports consuming the box.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_compare_blue_count",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One blue-object comparison uses aligned A/B mappings and balanced more-A/more-B/tie options, optionally with unknown. Both required image assets are supplied, their keys occur in string values, and no winner is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "Jev selects B at high confidence from a valid request. The final answer field is A while the reason identifies two blue objects in A and three in B. This is an agent final-field/decision-consumption error, not a bad request or wrong Jev response. A correct reason does not repair a wrong structured answer.",
+      "final_choice_consumption": "inconsistent_final_identifier"
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "descriptions",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "Conflicting reviewer reports and missing source text are retained. One support-status question includes an explicit unknown option, with supported/non-supported or contradicted alternatives. Jev selects unknown and the final response abstains.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "Conflicting reviewer reports and missing source text are retained. One support-status question includes an explicit unknown option, with supported/non-supported or contradicted alternatives. Jev selects unknown and the final response abstains.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_color_shape_match",
+      "arm": "guide",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One circle-identification question uses aligned A/B/C color labels and balanced candidate descriptions. The actual synthetic image is supplied under a referenced key; an optional unknown class represents unclear evidence.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "Conflicting reviewer reports and missing source text are retained. One support-status question includes an explicit unknown option, with supported/non-supported or contradicted alternatives. Jev selects unknown and the final response abstains.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "Conflicting reviewer reports and missing source text are retained. One support-status question includes an explicit unknown option, with supported/non-supported or contradicted alternatives. Jev selects unknown and the final response abstains.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_color_shape_match",
+      "arm": "guide",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One circle-identification question uses aligned A/B/C color labels and balanced candidate descriptions. The actual synthetic image is supplied under a referenced key; an optional unknown class represents unclear evidence.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_conflicting_reviewers",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "Conflicting reviewer reports and missing source text are retained. One support-status question includes an explicit unknown option, with supported/non-supported or contradicted alternatives. Jev selects unknown and the final response abstains.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "not_applicable",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "ambiguous_absent_object",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct referenced image is supplied. A balanced present/absent choice, optionally with unknown, asks specifically about a pink star. A speculative box is also requested, but its non-null low-confidence region is discarded when presence is absent. The workflow does not rely on a null-absence sentinel.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "Presence is correctly absent, while box returns a low-confidence region for a nonexistent target. The agent correctly discards that region, answers absent and abstains with box=null. No absence sentinel guarantee is inferred.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_color_shape_match",
+      "arm": "descriptions",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One circle-identification question uses aligned A/B/C color labels and balanced candidate descriptions. The caller explicitly supplies a faithful shape inventory, including the blue circle. This is a valid text check of the agent observation, not independent Jev vision.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "agent_visual_summary",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_locate_blue_circle",
+      "arm": "skill",
+      "repeat": 0,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "The correct synthetic image is supplied under a referenced key and the blue-circle target is unambiguous. Independent presence and box questions share one batch; positive presence supports consuming the box.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    },
+    {
+      "case_id": "image_compare_blue_count",
+      "arm": "skill",
+      "repeat": 1,
+      "call_index": 0,
+      "arguments_valid": true,
+      "criteria_quality": "pass",
+      "rationale": "One blue-object comparison uses aligned A/B mappings and balanced more-A/more-B/tie options, optionally with unknown. Both required image assets are supplied, their keys occur in string values, and no winner is asserted in advance.",
+      "tool": "jev_evaluate",
+      "json_schema_valid": true,
+      "evidence_mode": "supplied_image",
+      "outcome_attribution": "The Jev response is appropriate for the asked question, and the final response consumes the supported decision appropriately.",
+      "final_choice_consumption": "consistent"
+    }
+  ]
+}

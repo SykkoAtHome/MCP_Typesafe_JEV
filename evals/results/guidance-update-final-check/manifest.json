@@ -1,0 +1,47 @@
+[
+  {
+    "id": "image_compare_blue_count",
+    "category": "image",
+    "task": "Which image contains more blue objects? Return A or B.",
+    "state": "Images: scene_04a and scene_04b. Count all blue objects in each image.",
+    "assets": {
+      "scene_04a": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-final-check\\assets\\scene_04a.png"
+      },
+      "scene_04b": {
+        "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-final-check\\assets\\scene_04b.png"
+      }
+    },
+    "expected": {
+      "answer": "B"
+    },
+    "grading": {
+      "kind": "exact"
+    },
+    "jev": "optional",
+    "acceptable_strategies": [
+      "cross_image_comparison",
+      "jev_choice"
+    ],
+    "oracle": "Image A has two blue circles. Image B has a blue circle, a blue rectangle, and another blue circle, so it has three blue objects.",
+    "canonical": {
+      "tool": "jev_choice",
+      "arguments": {
+        "state": "Images: scene_04a and scene_04b. Count all blue objects in each image.",
+        "instructions": "Which image contains more blue objects?",
+        "criteria": {
+          "A": "First image",
+          "B": "Second image"
+        },
+        "assets": {
+          "scene_04a": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-final-check\\assets\\scene_04a.png"
+          },
+          "scene_04b": {
+            "path": "D:\\code\\MCP_Typesafe_JEV\\evals\\results\\guidance-update-final-check\\assets\\scene_04b.png"
+          }
+        }
+      }
+    }
+  }
+]

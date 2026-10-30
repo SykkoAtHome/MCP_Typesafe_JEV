@@ -1,0 +1,374 @@
+[
+  {
+    "name": "jev_evaluate",
+    "title": null,
+    "description": "Evaluate one or many structured System One questions (`noul`, `choice`, `score`, `box`) in parallel over `state` via a single `POST /v1/systemone` call (~100-150ms). All questions execute simultaneously with zero extra latency (Speculative Fan-Out). Each entry in `questions` maps a question ID to:\n- Noul (binary probability): `{\"type\": \"noul\", \"instructions\": \"...\", \"criteria\": {\"true\": \"...\", \"false\": \"...\"}}`\n- Choice (1 of up to 255 options): `{\"type\": \"choice\", \"instructions\": \"...\", \"criteria\": {\"opt_a\": \"...\", \"opt_b\": \"...\"}}`\n- Score (2-10 ordered rubric levels): `{\"type\": \"score\", \"instructions\": \"...\", \"criteria\": [\"level 0 (lowest)\", \"level 1\", \"level 2 (highest)\"]}`\n- Box (bounding box on image asset, Jev 1.14+): `{\"type\": \"box\", \"instructions\": \"the object in `photo`\"}`. All question types support images. In assets, map unique references to {\"path\": \"/absolute/photo.png\"} (local file uploaded to TypeSafe) or {\"format\": \"png\", \"data_base64\": \"...\"}. Put each reference in a string in state, instructions, or criteria. PNG/JPEG, 280..1568 px per side, <=16 MiB.",
+    "input_schema": {
+      "properties": {
+        "state": {
+          "title": "State"
+        },
+        "questions": {
+          "additionalProperties": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Questions",
+          "type": "object"
+        },
+        "model": {
+          "default": "jev-latest",
+          "title": "Model",
+          "type": "string"
+        },
+        "weights": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Weights"
+        },
+        "confidence_threshold": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence Threshold"
+        },
+        "assets": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assets"
+        },
+        "long_context": {
+          "default": false,
+          "title": "Long Context",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "state",
+        "questions"
+      ],
+      "type": "object",
+      "title": "jev_evaluateArguments"
+    },
+    "execution": null,
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "jev_evaluateDictOutput"
+    },
+    "icons": null,
+    "annotations": null,
+    "meta": null
+  },
+  {
+    "name": "jev_choice",
+    "title": null,
+    "description": "Evaluate a single categorical `choice` question over `state`. Picks 1 of up to 255 named options defined in `criteria` (mapping option key -> description/criteria or null) and returns the winning `choice`, full `probabilities` distribution, and `confidence`. Supports image assets in state, instructions, and criteria; see jev_evaluate for asset format.",
+    "input_schema": {
+      "properties": {
+        "state": {
+          "title": "State"
+        },
+        "instructions": {
+          "title": "Instructions"
+        },
+        "criteria": {
+          "additionalProperties": true,
+          "title": "Criteria",
+          "type": "object"
+        },
+        "assets": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assets"
+        },
+        "model": {
+          "default": "jev-latest",
+          "title": "Model",
+          "type": "string"
+        },
+        "long_context": {
+          "default": false,
+          "title": "Long Context",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "state",
+        "instructions",
+        "criteria"
+      ],
+      "type": "object",
+      "title": "jev_choiceArguments"
+    },
+    "execution": null,
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "jev_choiceDictOutput"
+    },
+    "icons": null,
+    "annotations": null,
+    "meta": null
+  },
+  {
+    "name": "jev_score",
+    "title": null,
+    "description": "Evaluate a single ordinal `score` rubric question over `state`. `criteria` must be an ordered list of 2 to 10 rubric levels from lowest (index 0) to highest (index n-1). Returns the expected `score`, `normalized` value in [0.0, 1.0], `probabilities`, `legend`, and calibrated `confidence`. Supports image assets in state, instructions, and criteria; see jev_evaluate for asset format.",
+    "input_schema": {
+      "properties": {
+        "state": {
+          "title": "State"
+        },
+        "instructions": {
+          "title": "Instructions"
+        },
+        "criteria": {
+          "items": {},
+          "title": "Criteria",
+          "type": "array"
+        },
+        "assets": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assets"
+        },
+        "model": {
+          "default": "jev-latest",
+          "title": "Model",
+          "type": "string"
+        },
+        "long_context": {
+          "default": false,
+          "title": "Long Context",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "state",
+        "instructions",
+        "criteria"
+      ],
+      "type": "object",
+      "title": "jev_scoreArguments"
+    },
+    "execution": null,
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "jev_scoreDictOutput"
+    },
+    "icons": null,
+    "annotations": null,
+    "meta": null
+  },
+  {
+    "name": "jev_noul",
+    "title": null,
+    "description": "Evaluate a single binary `noul` (yes/no probability) question over `state`. Returns `noul` probability P(true) in [0.0, 1.0], boolean `verdict`, and derived `confidence` |2p - 1|. Supports image assets in state, instructions, and criteria; see jev_evaluate for asset format.",
+    "input_schema": {
+      "properties": {
+        "state": {
+          "title": "State"
+        },
+        "instructions": {
+          "title": "Instructions"
+        },
+        "true_criteria": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "True Criteria"
+        },
+        "false_criteria": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "False Criteria"
+        },
+        "assets": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assets"
+        },
+        "model": {
+          "default": "jev-latest",
+          "title": "Model",
+          "type": "string"
+        },
+        "long_context": {
+          "default": false,
+          "title": "Long Context",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "state",
+        "instructions"
+      ],
+      "type": "object",
+      "title": "jev_noulArguments"
+    },
+    "execution": null,
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "jev_noulDictOutput"
+    },
+    "icons": null,
+    "annotations": null,
+    "meta": null
+  },
+  {
+    "name": "jev_box",
+    "title": null,
+    "description": "Evaluate a single `box` bounding-box detection question on an image asset using `jev-latest` (Jev 1.14+). Reference the asset key in `state` or `instructions` and pass `assets={\"<ref>\": {\"path\": \"/absolute/photo.png\"}}` to upload a local PNG/JPEG to TypeSafe, or use format and data_base64 for inline images. Returns normalized [0.0, 1.0] edges (`top`, `bottom`, `left`, `right`) and `confidence`.",
+    "input_schema": {
+      "properties": {
+        "state": {
+          "title": "State"
+        },
+        "instructions": {
+          "title": "Instructions"
+        },
+        "assets": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Assets",
+          "type": "object"
+        },
+        "model": {
+          "default": "jev-latest",
+          "title": "Model",
+          "type": "string"
+        },
+        "long_context": {
+          "default": false,
+          "title": "Long Context",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "state",
+        "instructions",
+        "assets"
+      ],
+      "type": "object",
+      "title": "jev_boxArguments"
+    },
+    "execution": null,
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "jev_boxDictOutput"
+    },
+    "icons": null,
+    "annotations": null,
+    "meta": null
+  },
+  {
+    "name": "jev_status",
+    "title": null,
+    "description": "Check TypeSafe API credential status (masked key and fingerprint only) and list available upstream Jev models (`jev-latest`, `jev-preview`, etc.) via `GET /v1/models`.",
+    "input_schema": {
+      "properties": {
+        "verify_upstream": {
+          "default": true,
+          "title": "Verify Upstream",
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "title": "jev_statusArguments"
+    },
+    "execution": null,
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "jev_statusDictOutput"
+    },
+    "icons": null,
+    "annotations": null,
+    "meta": null
+  }
+]

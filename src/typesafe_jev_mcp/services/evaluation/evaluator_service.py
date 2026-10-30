@@ -175,7 +175,7 @@ class EvaluationService:
         state: Any,
         instructions: Any,
         assets: dict[str, dict[str, str]],
-        model: str = "jev-preview",
+        model: str = "jev-latest",
         long_context: bool = False,
     ) -> dict[str, Any]:
         """Evaluate a single `box` bounding-box detection question on an image asset."""

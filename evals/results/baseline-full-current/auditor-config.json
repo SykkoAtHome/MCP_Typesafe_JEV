@@ -1,0 +1,7 @@
+{
+  "model_requested": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "fresh_context": true,
+  "role": "independent criteria and code audit",
+  "auditor_usage": "unavailable"
+}

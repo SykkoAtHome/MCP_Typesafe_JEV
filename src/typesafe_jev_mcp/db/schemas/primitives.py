@@ -157,7 +157,7 @@ class ScoreQuestion(BaseModel):
 
 
 class BoxQuestion(BaseModel):
-    """Bounding box detection question for an image asset (`jev-preview` / `jev-1.14.0`)."""
+    """Bounding box detection question for an image asset (Jev 1.14 or newer)."""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -183,45 +183,6 @@ QuestionItem = Annotated[
     Union[NoulQuestion, ChoiceQuestion, ScoreQuestion, BoxQuestion],
     Field(discriminator="type"),
 ]
-
-
-class EvaluationRequest(BaseModel):
-    """Validated payload for `POST https://api.typesafe.ai/v1/systemone`."""
-
-    model_config = ConfigDict(extra="forbid")
-
-    model: str = "jev-latest"
-    state: JsonValue = ""
-    questions: dict[str, QuestionItem]
-    assets: dict[str, dict[str, str]] | None = None
-    long_context: bool = False
-    enable_images: bool = False
-
-    @field_validator("state")
-    @classmethod
-    def _validate_state(cls, val: Any) -> Any:
-        return validate_json_state(val)
-
-    @model_validator(mode="after")
-    def _validate_questions(self) -> EvaluationRequest:
-        if not self.questions:
-            raise ValidationError("EvaluationRequest requires at least one question.")
-        has_box = any(isinstance(q, BoxQuestion) for q in self.questions.values())
-        if has_box or self.assets:
-            self.enable_images = True
-        if has_box and self.model == "jev-latest":
-            self.model = "jev-preview"
-        return self
-
-    def to_api_payload(self) -> dict[str, Any]:
-        payload: dict[str, Any] = {
-            "model": self.model,
-            "state": self.state,
-            "questions": {qid: q.to_api_dict() for qid, q in self.questions.items()},
-        }
-        if self.assets:
-            payload["assets"] = self.assets
-        return payload
 
 
 class NoulAnswer(BaseModel):
